@@ -1,0 +1,161 @@
+[{
+        "model": "Payment.Currency",
+        "pk": "1",
+        "fields": {
+            "name": "Dollar",
+            "native": "Dollar United States",
+            "code": "USD",
+            "symbol": "💲"
+        }
+    },
+    {
+        "model": "Payment.Currency",
+        "pk": "2",
+        "fields": {
+            "name": "Rupee's India",
+            "native": "Rupee's India",
+            "code": "INR",
+            "symbol": "₹"
+        }
+    },
+    {
+        "model": "Payment.Currency",
+        "pk": "3",
+        "fields": {
+            "name": "Dollar's Taiwan",
+            "native": "新臺幣[I]",
+            "code": "TWD",
+            "symbol": "🇹🇼"
+        }
+    },
+    {
+        "model": "Payment.Currency",
+        "pk": "4",
+        "fields": {
+            "name": "Euro",
+            "native": "Euro",
+            "code": "EUR",
+            "symbol": "💶 €"
+        }
+    },
+    {
+        "model": "Payment.Currency",
+        "pk": "5",
+        "fields": {
+            "name": "Yen",
+            "native": "円",
+            "code": "JPY",
+            "symbol": "💴"
+        }
+    },
+    {
+        "model": "Payment.Currency",
+        "pk": "6",
+        "fields": {
+            "name": "Lira's Turkey",
+            "native": "Türk lirası",
+            "code": "TRY",
+            "symbol": "₺"
+        }
+    },
+    {
+        "model": "Payment.Currency",
+        "pk": "7",
+        "fields": {
+            "name": "Egyptian pound",
+            "native": "جنيه مصرى",
+            "code": "EGP",
+            "symbol": "💷"
+        }
+    },
+    {
+        "model": "Payment.Currency",
+        "pk": "8",
+        "fields": {
+            "name": "Dinar's Jordan",
+            "native": "دينار أردنى",
+            "code": "JOD",
+            "symbol": "JOD"
+        }
+    },
+    {
+        "model": "Payment.Currency",
+        "pk": "9",
+        "fields": {
+            "name": "Dinar's Kuwait",
+            "native": "دينار كويتى",
+            "code": "KWD",
+            "symbol": "🇰🇼"
+        }
+    },
+    {
+        "model": "Payment.Currency",
+        "pk": "10",
+        "fields": {
+            "name": "Dinar's Libya",
+            "native": "دينار ليبى",
+            "code": "LYD",
+            "symbol": "LD"
+        }
+    },
+    {
+        "model": "Payment.Currency",
+        "pk": "11",
+        "fields": {
+            "name": "Dinar's Tunisia",
+            "native": "دينار تونسى",
+            "code": "TND",
+            "symbol": "DT"
+        }
+    },
+    {
+        "model": "Payment.Currency",
+        "pk": "12",
+        "fields": {
+            "name": "Dinar's Iraq",
+            "native": "دينار عراقى",
+            "code": "IQD",
+            "symbol": "🇮🇶"
+        }
+    },
+    {
+        "model": "Payment.Currency",
+        "pk": "13",
+        "fields": {
+            "name": "Riyal's Qatar",
+            "native": "ريال قطرى",
+            "code": "QAR",
+            "symbol": "🇶🇦"
+        }
+    },
+    {
+        "model": "Payment.Currency",
+        "pk": "14",
+        "fields": {
+            "name": "Riyal's Saudi Arabia",
+            "native": "ريال سعودى",
+            "code": "SAR",
+            "symbol": "🇸🇦"
+        }
+    },
+    {
+        "model": "Payment.Currency",
+        "pk": "15",
+        "fields": {
+            "name": "Riyal's Oman",
+            "native": "ريال عمانى",
+            "code": "OMR",
+            "symbol": "🏳️‍🌈"
+        }
+    },
+    {
+        "model": "Payment.Currency",
+        "pk": "16",
+        "fields": {
+            "name": "Dirham",
+            "native": "درهم إمارتى",
+            "code": "AED",
+            "symbol": "🇦🇪"
+        }
+    }
+]

@@ -1,0 +1,46 @@
+[
+  {
+    "model": "Language.Language",
+    "pk": 1,
+    "fields": {
+      "name": "English",
+      "native": "English",
+      "symbol": "en",
+      "emoji": "🇬🇧",
+      "rtl": false
+    }
+  },
+  {
+    "model": "Language.Language",
+    "pk": 2,
+    "fields": {
+      "name": "French",
+      "native": "Française",
+      "symbol": "fr",
+      "emoji": "🇫🇷",
+      "rtl": false
+    }
+  },
+  {
+    "model": "Language.Language",
+    "pk": 3,
+    "fields": {
+      "name": "Arabic",
+      "native": "عربي",
+      "symbol": "ar",
+      "emoji": "🇪🇬",
+      "rtl": true
+    }
+  },
+  {
+    "model": "Language.Language",
+    "pk": 4,
+    "fields": {
+      "name": "Malayalam",
+      "native": "മലയാളം",
+      "symbol": "ml",
+      "emoji": "🇮🇳",
+      "rtl": false
+    }
+  }  
+] 
