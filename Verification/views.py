@@ -13,7 +13,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 
 from User.models import User, Profile
-from .TwilioMessageHandler import TwilioMessageHandler
+from API.TwilioMessageHandler import TwilioMessageHandler
 
 # This class returns the string needed to generate the key
 class generateKey:

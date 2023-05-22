@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
+
 from .Utils import otp_generator
 from knox.models import AuthToken
 from django.contrib.auth import login
@@ -11,6 +12,7 @@ from rest_framework import permissions, generics, status
 import requests
 from rest_framework import serializers
 
+from .TwilioMessageHandler import TwilioMessageHandler
 from .Serializer import  RegisterSerializer
 
 User = get_user_model()
@@ -39,14 +41,13 @@ class RegisterViewSet(ModelViewSet):
 
     
 
-def send_otp(mobile):
+def send_otp(mobile, otp_key):
     """
     This is an helper function to send otp to session stored mobiles or 
     passed mobile number as argument.    """
     if mobile:
-        key = otp_generator()
         mobile = str(mobile)
-        otp_key = str(key)
+        # otp_key = str(otp_generator())
         link = f'https://2factor.in/API/R1/?module=TRANS_SMS&apikey=7c59cf94-d129-11ec-9c12-0200cd936042&to={mobile}&from=MMBook&templatename=mymedbook&var1={otp_key}&var2={otp_key}'
         result = requests.get(link, verify=False)
         print(result)
@@ -66,7 +67,23 @@ class MobileSendOTP(APIView):
                 if user.exists():
                     user_data = user.first()
                     old_otp = user_data.otp
-                    new_otp = send_otp(mobile)
+                    otp_key = str(otp_generator())
+                    new_otp = send_otp(mobile, otp_key)
+                    try :
+                        if request.POST['methodOtp']=="methodOtpWhatsapp":
+                            messagehandler=TwilioMessageHandler(mobile,otp_key).send_otp_via_whatsapp()
+                        else:
+                            messagehandler=TwilioMessageHandler(mobile,otp_key).send_otp_via_message()
+                    except Exception (e):
+                        return Response(
+                            {
+                                'success': False,
+                                'message': f'Error in send OTP: {e}',
+                                'status': status.HTTP_400_BAD_REQUEST,
+                            },
+                            status= status.HTTP_400_BAD_REQUEST,
+                        )
+                        
                     user_data.mobile = mobile
                     user_data.otp = new_otp
                     if old_otp:
