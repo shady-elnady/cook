@@ -1,47 +1,44 @@
 [
   {
-    "model": "Location.Country",
+    "model": "Address.Country",
     "pk": 1,
     "fields": {
       "name": "Egypt",
       "native": "مصر",
-      "continents": "Africa",
+      "continent": "Africa",
       "capital": 1,
       "flag_emoji": "🇪🇬",
       "currency": 7,
       "language": 3,
-      "tel_code": "002",
-      "time_zones": "UTC+02:00"
+      "tel_code": "002"
     }
   },
   {
-    "model": "Location.Country",
+    "model": "Address.Country",
     "pk": 2,
     "fields": {
       "name": "United Arab Emirates",
       "native": "دولة الإمارات العربية المتحدة",
-      "continents": "Asia",
+      "continent": "Asia",
       "capital": 6,
       "flag_emoji": "🇦🇪",
       "currency": 16,
       "language": 3,
-      "tel_code": "971",
-      "timezones": "UTC+02:00"
+      "tel_code": "971"
     }
   },
   {
-    "model": "Location.Country",
+    "model": "Address.Country",
     "pk": 3,
     "fields": {
       "name": "France",
       "native": "République française",
-      "continents": "Europe",
+      "continent": "Europe",
       "capital": 7,
       "flag_emoji": "🇫🇷",
       "currency": 4,
       "language": 2,
-      "tel_code": "33",
-      "timezones": "UTC+02:00"
+      "tel_code": "33"
     }
   }
 ]

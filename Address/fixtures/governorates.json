@@ -1,6 +1,6 @@
 [
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 1,
     "fields": {
       "name": "Cairo",
@@ -10,7 +10,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 2,
     "fields": {
       "name": "Alexandria",
@@ -20,7 +20,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 3,
     "fields": {
       "name": "Dakahlia",
@@ -30,7 +30,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 4,
     "fields": {
       "name": "Aswan",
@@ -40,7 +40,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 5,
     "fields": {
       "name": "Arish",
@@ -50,7 +50,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 6,
     "fields": {
       "name": "Beni Suef",
@@ -60,7 +60,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 7,
     "fields": {
       "name": "Damietta",
@@ -70,7 +70,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 8,
     "fields": {
       "name": "Ismailia",
@@ -80,7 +80,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 9,
     "fields": {
       "name": "Luxor",
@@ -90,7 +90,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 9,
     "fields": {
       "name": "Monufia",
@@ -100,7 +100,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 10,
     "fields": {
       "name": "Port Said",
@@ -110,7 +110,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 11,
     "fields": {
       "name": "Red Sea",
@@ -120,7 +120,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 12,
     "fields": {
       "name": "Suez",
@@ -130,7 +130,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 13,
     "fields": {
       "name": "El Tour",
@@ -140,7 +140,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 14,
     "fields": {
       "name": "10th of Ramadan",
@@ -150,7 +150,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 15,
     "fields": {
       "name": "Asyut",
@@ -160,7 +160,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 16,
     "fields": {
       "name": "Damanhur",
@@ -170,7 +170,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 17,
     "fields": {
       "name": "Faiyum",
@@ -180,7 +180,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 18,
     "fields": {
       "name": "Kafr El Sheikh",
@@ -190,7 +190,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 19,
     "fields": {
       "name": "Marsa Matruh",
@@ -200,7 +200,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 20,
     "fields": {
       "name": "Minya",
@@ -210,7 +210,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 21,
     "fields": {
       "name": "New Valley",
@@ -220,7 +220,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 22,
     "fields": {
       "name": "Sohag",
@@ -230,7 +230,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 23,
     "fields": {
       "name": "Qena",
@@ -240,7 +240,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 24,
     "fields": {
       "name": "Tanta",
@@ -250,7 +250,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 25,
     "fields": {
       "name": "Qalyubia",
@@ -260,7 +260,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 26,
     "fields": {
       "name": "Isle of France",
@@ -270,7 +270,7 @@
     }
   },
   {
-    "model": "Location.Governorate",
+    "model": "Address.Governorate",
     "pk": 27,
     "fields": {
       "name": "Emirate of Abu Dhabi",

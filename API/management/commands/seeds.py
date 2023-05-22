@@ -14,8 +14,11 @@ class Command(BaseCommand):
         works = [
             "makemigrations",
             "migrate",
+            "superuser",
             "category_seeds",
+            ("loaddata", "languages.json"),
             ("loaddata", "categories.json"),
+            ("loaddata", "currencies.json"),
         ]
         
         for work in works:

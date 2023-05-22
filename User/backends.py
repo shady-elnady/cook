@@ -4,11 +4,13 @@ from .models import User
 
 
 class EmailOrUsernameModelBackend(object):
-    def authenticate(self, username=None, password=None):
+    def authenticate(self, username=None, password=None, email=None):
         if '@' in username:
             kwargs = {'email': username}
+            kwargs = {'username': username}
         else:
             kwargs = {'username': username}
+            kwargs = {'email': email}
         try:
             user = User.objects.get(**kwargs)
             if user.check_password(password):

@@ -1,6 +1,6 @@
 [
   {
-    "model": "Location.City",
+    "model": "Address.City",
     "pk": 1,
     "fields": {
       "name": "Cairo",
@@ -10,7 +10,7 @@
     }
   },
   {
-    "model": "Location.City",
+    "model": "Address.City",
     "pk": 2,
     "fields": {
       "name": "Mansoura",
@@ -20,7 +20,7 @@
     }
   },
   {
-    "model": "Location.City",
+    "model": "Address.City",
     "pk": 3,
     "fields": {
       "name": "Sherbin",
@@ -30,7 +30,7 @@
     }
   },
   {
-    "model": "Location.City",
+    "model": "Address.City",
     "pk": 4,
     "fields": {
       "name": "Belqas",
@@ -40,7 +40,7 @@
     }
   },
   {
-    "model": "Location.City",
+    "model": "Address.City",
     "pk": 5,
     "fields": {
       "name": "Talkha",
@@ -50,7 +50,7 @@
     }
   },
   {
-    "model": "Location.City",
+    "model": "Address.City",
     "pk": 6,
     "fields": {
       "name": "Abu Dhabi",
@@ -60,7 +60,7 @@
     }
   },
   {
-    "model": "Location.City",
+    "model": "Address.City",
     "pk": 7,
     "fields": {
       "name": "Paris",

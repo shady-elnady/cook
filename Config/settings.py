@@ -306,6 +306,6 @@ DEFAULT_FROM_EMAIL = 'shadyelnady.gmail.com'
 
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
     'User.backends.EmailOrUsernameModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
