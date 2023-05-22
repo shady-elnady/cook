@@ -1,0 +1,23 @@
+[
+  {
+    "model": "Restaurant.Color",
+    "pk": 1,
+    "fields": {
+      "color": "Sandwish"
+    }
+  },
+  {
+    "model": "Restaurant.Color",
+    "pk": 2,
+    "fields": {
+      "color": "Pizza"
+    }
+  },
+  {
+    "model": "Restaurant.Color",
+    "pk": 3,
+    "fields": {
+      "color": "Burgers"
+    }
+  }
+] 

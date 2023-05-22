@@ -8,19 +8,21 @@ from datetime import date
 import calendar
 from os.path import join
 from django.db.models import (
-    Model, TextChoices,
+    Model, TextChoices, UUIDField,
     OneToOneField, FloatField, TextField,
     URLField,BooleanField, CharField,
     ForeignKey, DateField, EmailField,
     DateTimeField, ImageField, SmallIntegerField,
-    SET_NULL, CASCADE, ManyToManyField,
+    SET_NULL, CASCADE, ManyToManyField, IntegerField, PositiveSmallIntegerField,
 )
-from django.conf import settings
-from Location.models import Location
+import uuid
 
+
+from Location.models import Location
 from Restaurant.models import Restaurant
 from Utils.models import BaseModel, BaseModelImage
 from Language.models import Language
+from Address.models import Address
 from .managers import UsersManager
 
 
@@ -39,15 +41,33 @@ class Age:
 
 class User(AbstractBaseUser, PermissionsMixin):
 
-    USERNAME_FIELD = "email"      # e.g: "username", "email"
+    USERNAME_FIELD = "username"      # e.g: "username", "email"
     EMAIL_FIELD = "email"         # e.g: "email", "primary_email"
-    REQUIRED_FIELDS = ["username"]
+    REQUIRED_FIELDS = ['password']
 
     objects = UsersManager()
     
+    id = UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name= _("ID"),)
+    otp_enabled = BooleanField(default=False, verbose_name= _("OTP Enabled"),)
+    otp = CharField(max_length=255, null=True, verbose_name= _("OTP Base32"),)
+    phone_regex = RegexValidator(
+        regex=r'^\+?1?\d{9,15}$',
+        message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.",
+    )
+    mobile = CharField(
+        max_length=17,
+        unique= True,
+        validators=[phone_regex],
+        blank=True,
+        null= True,
+        verbose_name= _("mobile"),
+    )
     email = EmailField(
         max_length=200,
         unique=True,
+        error_messages={
+            'unique': _('E-Mail Is User')
+        },
         null=False,
         blank=False,
         verbose_name= _("E-Mail"),
@@ -55,6 +75,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = CharField(
         max_length=30,
         unique=True,
+         error_messages={
+            'unique': _('User Name Is User. choose Another')
+        },
         null=False,
         blank=False,
         verbose_name= _("User Name"),
@@ -107,17 +130,6 @@ class Profile(BaseModel, BaseModelImage):
         related_name= "profile",
         verbose_name= _("User"),
     )
-    phone_regex = RegexValidator(
-        regex=r'^\+?1?\d{9,15}$',
-        message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.",
-    )
-    phone_number = CharField(
-        validators=[phone_regex],
-        max_length=17,
-        blank=True,
-        null= True,
-        verbose_name= _("Phone Number"),
-    ) # Validators should be a list
     first_name = CharField(
         max_length=15,
         null= True,
@@ -151,14 +163,26 @@ class Profile(BaseModel, BaseModelImage):
     )
     location = ForeignKey(
         Location,
+        null= True,
+        blank= True,
         on_delete= CASCADE,
         related_name= "+",
         verbose_name= _("Location"),
     )
+    address = ForeignKey(
+        Address,
+        null= True,
+        blank= True,
+        on_delete= CASCADE,
+        related_name= "Profiles",
+        verbose_name= _("Address"),
+    )
 
     @property
     def Full_Name(self) -> str:
-        return f"{self.first_name} {self.family_name}"
+        if self.first_name is None and self.family_name is None:
+            return None
+        return f"{str(self.first_name)} {str(self.family_name)}"
     
     @property
     def age(self) -> Age:
@@ -215,7 +239,7 @@ class UserRestaurant(BaseModel):
     restaurant = ForeignKey(
         Restaurant,
         on_delete=CASCADE,
-        related_name= "Users",
+        related_name= "Choiced_Users",
         verbose_name= _("Restaurant"),
     )
     is_favorite = BooleanField(

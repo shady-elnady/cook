@@ -1,0 +1,26 @@
+[
+  {
+    "model": "Category.Category",
+    "pk": 1,
+    "fields": {
+      "name": "Sandwish",
+      "image": "images/Category/Sandwich.png' %}"
+    }
+  },
+  {
+    "model": "Category.Category",
+    "pk": 2,
+    "fields": {
+      "name": "Pizza",
+      "image": "images/Category/Pizza.png' %}"
+    }
+  },
+  {
+    "model": "Category.Category",
+    "pk": 3,
+    "fields": {
+      "name": "Burgers",
+      "image": "images/Category/Burgers.png' %}"
+    }
+  }
+] 

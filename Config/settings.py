@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
@@ -41,9 +42,21 @@ ALLOWED_HOSTS = [
     "herokuapp.com",
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000"
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
 # Application definition
 THIRD_LIBRARIES= [
     'rest_framework',
+    'knox',
+    'django_filters',
+    'corsheaders',
+    # 'colorfield ',
+    # 'rest_pyotp',
+    # 'drf_yasg',
     # 'rest_framework_simplejwt',
 ]
 
@@ -53,6 +66,7 @@ MY_APP= [
     "Category",
     "Restaurant",
     "Payment",
+    "Address",
     "Meal",
     "User",
     "Driver",
@@ -87,6 +101,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # for Langauge
     'django.middleware.locale.LocaleMiddleware',
+    # for corsheaders
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'Config.urls'
@@ -164,8 +180,8 @@ USE_I18N = True
 USE_TZ = True
 
 LANGUAGES = [
-    ("ar", _("Arabic")),
     ("en", _("English")),
+    ("ar", _("Arabic")),
     ("fr", _("French")),
 ]
 # True for right-to-left languages like Arabic, and to False otherwise
@@ -244,10 +260,52 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-        # 'rest_framework.permissions.IsAuthenticated',
-    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'knox.auth.TokenAuthentication',
+    ], ## knox Library
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
+    # 'EXCEPTION_HANDLER': 'API.exceptions.django_error_handler'  ## Excepitions
+
 }
+
+
+REST_KNOX = {
+    'USER_SERIALIZER': 'API.Serializer.UserSerializer',
+    'TOKEN_TTL': timedelta(days=1),
+}
+
+## Twilio
+ACCOUNT_SID='AC0a90271b39b670a662b4ed8c08d775e9'
+AUTH_TOKEN='3b6e1f349f81a19e8cfed301b6f828fa'
+COUNTRY_CODE='+2'
+TWILIO_WHATSAPP_NUMBER='whatsapp:+14155238886'
+TWILIO_PHONE_NUMBER='+12525184301'
+
+##
+LOGIN_URL = reverse_lazy('User:LogIn')
+LOGIN_REDIRECT_URL = reverse_lazy('Restaurant:Home')
+LOGOUT_REDIRECT_URL = reverse_lazy('User:LogIn')
+
+
+
+## SMTP Configure
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'shadyelnady.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'shadyelnady.gmail.com'
+EMAIL_HOST_PASSWORD = '12345'
+DEFAULT_FROM_EMAIL = 'shadyelnady.gmail.com'
+
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'User.backends.EmailOrUsernameModelBackend',
+)

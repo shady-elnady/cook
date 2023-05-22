@@ -1,0 +1,72 @@
+[
+  {
+    "model": "Location.City",
+    "pk": 1,
+    "fields": {
+      "name": "Cairo",
+      "native": "القاهره",
+      "country": 1,
+      "governorate": 1
+    }
+  },
+  {
+    "model": "Location.City",
+    "pk": 2,
+    "fields": {
+      "name": "Mansoura",
+      "native": "المنصوره",
+      "country": 1,
+      "governorate": 3
+    }
+  },
+  {
+    "model": "Location.City",
+    "pk": 3,
+    "fields": {
+      "name": "Sherbin",
+      "native": "شربين",
+      "country": 1,
+      "governorate": 3
+    }
+  },
+  {
+    "model": "Location.City",
+    "pk": 4,
+    "fields": {
+      "name": "Belqas",
+      "native": "بلقاس",
+      "country": 1,
+      "governorate": 3
+    }
+  },
+  {
+    "model": "Location.City",
+    "pk": 5,
+    "fields": {
+      "name": "Talkha",
+      "native": "طلخا",
+      "country": 1,
+      "governorate": 3
+    }
+  },
+  {
+    "model": "Location.City",
+    "pk": 6,
+    "fields": {
+      "name": "Abu Dhabi",
+      "native": "أبوظبى",
+      "country": 2,
+      "governorate": 27
+    }
+  },
+  {
+    "model": "Location.City",
+    "pk": 7,
+    "fields": {
+      "name": "Paris",
+      "native": "Paris",
+      "country": 3,
+      "governorate": 26
+    }
+  }
+]

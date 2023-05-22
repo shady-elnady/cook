@@ -1,0 +1,282 @@
+[
+  {
+    "model": "Location.Governorate",
+    "pk": 1,
+    "fields": {
+      "name": "Cairo",
+      "native": "القاهره",
+      "tel_code": "02",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 2,
+    "fields": {
+      "name": "Alexandria",
+      "native": "الاسكندريه",
+      "tel_code": "03",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 3,
+    "fields": {
+      "name": "Dakahlia",
+      "native": "الدقهليه",
+      "tel_code": "050",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 4,
+    "fields": {
+      "name": "Aswan",
+      "native": "أسوان",
+      "tel_code": "097",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 5,
+    "fields": {
+      "name": "Arish",
+      "native": "العريش",
+      "tel_code": "068",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 6,
+    "fields": {
+      "name": "Beni Suef",
+      "native": "بنى سويف",
+      "tel_code": "082",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 7,
+    "fields": {
+      "name": "Damietta",
+      "native": "دمياط",
+      "tel_code": "057",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 8,
+    "fields": {
+      "name": "Ismailia",
+      "native": "اسماعليه",
+      "tel_code": "064",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 9,
+    "fields": {
+      "name": "Luxor",
+      "native": "الاقصر",
+      "tel_code": "095",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 9,
+    "fields": {
+      "name": "Monufia",
+      "native": "منوفيه",
+      "tel_code": "048",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 10,
+    "fields": {
+      "name": "Port Said",
+      "native": "بورسعيد",
+      "tel_code": "066",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 11,
+    "fields": {
+      "name": "Red Sea",
+      "native": "البحرالاحمر",
+      "tel_code": "065",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 12,
+    "fields": {
+      "name": "Suez",
+      "native": "سويس",
+      "tel_code": "062",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 13,
+    "fields": {
+      "name": "El Tour",
+      "native": "الطور",
+      "tel_code": "069",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 14,
+    "fields": {
+      "name": "10th of Ramadan",
+      "native": "العاشر من رمضان",
+      "tel_code": "055",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 15,
+    "fields": {
+      "name": "Asyut",
+      "native": "أسيوط",
+      "tel_code": "088",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 16,
+    "fields": {
+      "name": "Damanhur",
+      "native": "دمنهور",
+      "tel_code": "04",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 17,
+    "fields": {
+      "name": "Faiyum",
+      "native": "فيوم",
+      "tel_code": "048",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 18,
+    "fields": {
+      "name": "Kafr El Sheikh",
+      "native": "كفرالشيخ",
+      "tel_code": "047",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 19,
+    "fields": {
+      "name": "Marsa Matruh",
+      "native": "مرسى مطروح",
+      "tel_code": "046",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 20,
+    "fields": {
+      "name": "Minya",
+      "native": "منيا",
+      "tel_code": "086",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 21,
+    "fields": {
+      "name": "New Valley",
+      "native": "الوادى الجديد",
+      "tel_code": "092",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 22,
+    "fields": {
+      "name": "Sohag",
+      "native": "سوهاج",
+      "tel_code": "093",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 23,
+    "fields": {
+      "name": "Qena",
+      "native": "قنا",
+      "tel_code": "096",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 24,
+    "fields": {
+      "name": "Tanta",
+      "native": "طنطا",
+      "tel_code": "040",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 25,
+    "fields": {
+      "name": "Qalyubia",
+      "native": "قليوبيه",
+      "tel_code": "013",
+      "country": 1
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 26,
+    "fields": {
+      "name": "Isle of France",
+      "native": "Île-de-France",
+      "tel_code": "1",
+      "country": 3
+    }
+  },
+  {
+    "model": "Location.Governorate",
+    "pk": 27,
+    "fields": {
+      "name": "Emirate of Abu Dhabi",
+      "native": "إمارة أبو ظبي",
+      "tel_code": "2",
+      "country": 3
+    }
+  }
+]

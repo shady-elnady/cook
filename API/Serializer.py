@@ -1,3 +1,4 @@
+import re
 from django.contrib.auth import authenticate
 from django.contrib.auth.password_validation import validate_password
 from rest_framework.serializers import (
@@ -8,96 +9,69 @@ from rest_framework.serializers import (
     ValidationError,
  )
 from rest_framework.validators import UniqueValidator
+from django.utils.translation import gettext_lazy as _
+from rest_framework.response import Response
+from rest_framework import status, generics
 
+import imp
+from rest_framework import serializers
+from django.contrib.auth import get_user_model
+# from accounts.models import Role
 from User.models import User
 
 
+# User = get_user_model()
 
 class RegisterSerializer(ModelSerializer):
+    username = CharField(
+        required=True,
+        validators=[UniqueValidator(queryset=User.objects.all(), message= _("User Name Used. chosse Another"))],
+    )
     email = EmailField(
         required=True,
-        validators=[UniqueValidator(queryset=User.objects.all())],
+        validators=[UniqueValidator(queryset=User.objects.all(), message= _("E-Mail is Exced."))],
     )
     password = CharField(
         write_only=True,
         required=True,
         validators=[validate_password],
     )
-    password2 = CharField(
-        write_only=True,
-        required=True,
-    )
-    class Meta:
-        model = User
-        fields = ('username', 'password', 'password2','email')
-        extra_kwargs = {
-        # 'first_name': {'required': True},
-        # 'last_name': {'required': True}
-        }
-
-    def validate(self, attrs):
-        if attrs['password'] != attrs['password2']:
-            raise ValidationError(
-                {
-                    "password": "Password fields didn't match.",
-                },
-            )
-        return attrs
     
     def create(self, validated_data):
         user = User.objects.create(
-        username=validated_data['username'],
-        email=validated_data['email'],
-        # first_name=validated_data['first_name'],
-        # last_name=validated_data['last_name']
+        **validated_data
         )
         user.set_password(validated_data['password'])
         user.save()
-        return user
+        return user    
+    
+    class Meta:
+        model = User
+        fields = [
+            'username', "email", 'password',           
+        ]
+        extra_kwargs = {
+            "id": {"read_only": True},
+            "username": {"required": True},
+            "email": {"required": True},
+            "password": {"required": True},
+            "mobile": {"required": False},
+        }
 
 
 
 
+class UserLoginSerializer(serializers.Serializer):
 
-class LoginSerializer(Serializer):
-    """
-    This serializer defines two fields for authentication:
-      * username
-      * password.
-    It will try to authenticate the user with when validated.
-    """
-    email = EmailField(
-        label="email",
-        write_only=True
-    )
-    password = CharField(
-        label="Password",
-        # This will be used when the DRF browsable API is enabled
-        style={'input_type': 'password'},
-        trim_whitespace=False,
-        write_only=True
-    )
+    username = serializers.CharField(max_length=255)
+    password = serializers.CharField(max_length=128, write_only=True)
 
-    def validate(self, attrs):
-        # Take username and password from request
-        email = attrs.get('email')
-        password = attrs.get('password')
-
-        if email and password:
-            # Try to authenticate the user using Django auth framework.
-            user = authenticate(
-                request=self.context.get('request'),
-                email=email,
-                password=password,
+    def validate(self, data):
+        username = data.get("username", None)
+        password = data.get("password", None)
+        user = authenticate(username=username, password=password)
+        if user is None:
+            raise serializers.ValidationError(
+                'A user with this UserName or E-Mail and password is not found.'
             )
-            if not user:
-                # If we don't have a regular user, raise a ValidationError
-                msg = 'Access denied: wrong username or password.'
-                raise ValidationError(msg, code='authorization')
-        else:
-            msg = 'Both "Email" and "password" are required.'
-            raise ValidationError(msg, code='authorization')
-        # We have a valid user, put it in the serializer's validated_data.
-        # It will be used in the view.
-        attrs['user'] = user
-        return attrs
+        return data
