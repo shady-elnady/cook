@@ -55,7 +55,7 @@ class LogoSerializer(HyperlinkedModelSerializer):
         fields = [
             "url",
             "restaurant",
-            "color",
+            # "color",
             "gradient",
             "image",
         ]
@@ -106,6 +106,7 @@ class RestaurantMealSerializer(HyperlinkedModelSerializer):
             "is_popular",
             "is_Popular",
             "images",
+            "image",
             "slug",
         ]
 
@@ -122,7 +123,6 @@ class RestaurantSerializer(HyperlinkedModelSerializer):
             "url",
             "id",
             "name",
-            "is_best",
             "free_shipping",
             "Restaurant_Meals",
             "type",
@@ -135,6 +135,7 @@ class RestaurantSerializer(HyperlinkedModelSerializer):
             "Logo",
             "location",
             "Reviews",
+            "Likes",
             "created_date",
             "last_updated",
             "users_choiced_count", ##

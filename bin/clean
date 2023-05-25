@@ -17,7 +17,8 @@ rmdir media/*
 # python manage.py loaddata currencies
 
 # rm -r -f -v ./media/
-# mkdir media
-# mkdir media/Category
+mkdir media
+mkdir media/images/Category
+mkdir media/images/Logo
 # python manage.py seeds 
 # python manage.py runserver

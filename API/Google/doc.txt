@@ -1,0 +1,10 @@
+https://medium.com/codex/manually-obtain-googleoauth2-access-token-with-your-web-browser-and-curl-fd93effe15ff
+
+
+
+https://accounts.google.com/o/oauth2/auth?client_id=651914112561-qc7gkks9ahs8tvukdvu7hnfp8uco9pgb.apps.googleusercontent.com&redirect_uri=http://127.0.0.1&scope=profile&email&response_type=code&include_granted_scopes=true&access_type=offline&state=state_parameter_passthrough_value
+
+
+
+
+curl -X GET http://127.0.0.1:8000/api/categories/ -H 'Authorization: Token 5c684ae0cec7ffb96646daed0e9094348f88e35a'

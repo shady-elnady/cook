@@ -10,31 +10,37 @@ class Command(BaseCommand):
     help = "Creates initial models"
 
     def handle(self, *args, **options):
-
+        ### 
         works = [
             "makemigrations",
             "migrate",
-            "superuser",
-            "category_seeds",
-            ("loaddata", "languages.json"),
-            ("loaddata", "categories.json"),
-            ("loaddata", "currencies.json"),
+            "category_seeds"
+            "restaurant_seeds",
         ]
-        
         for work in works:
             try:
                 call_command(work)
             except Exception as e:
                 self.stdout.write(
-                    self.style.ERROR(f"Failed to create {work} \n \t Error is: {e}")
+                    self.style.ERROR(f"{work} Failed  \n \t \t Error is: {e}")
                 )
-        # call_command("makemigrations")
-        # call_command("migrate")
-        # # call_command("loaddata", "db_user_fixture.json")
-        # call_command("category_seeds")
-
-        # call_command("loaddata", "categories.json")
-
+        
+        ###
+        load_data = [
+            "languages.json",
+            "currencies.json",
+            "countries.json",
+            "governorates.json",
+            "cities.json",
+        ]
+        for data in load_data:
+            try:
+                call_command("loaddata", data)
+            except Exception as e:
+                self.stdout.write(
+                    self.style.ERROR(f"{data} Load Data Failed , \n \t \t Error is: {e}")
+                )
+        
         self.stdout.write(
             self.style.SUCCESS("Successfully created initial models")
         )

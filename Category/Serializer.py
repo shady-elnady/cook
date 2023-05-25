@@ -13,5 +13,7 @@ class CategorySerializer(HyperlinkedModelSerializer):
             "id",
             "name",
             "image",
+            "created_date",
+            "last_updated",
             "slug",
         ]

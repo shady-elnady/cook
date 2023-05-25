@@ -40,6 +40,8 @@ class Country(BaseModelNative):
     capital= OneToOneField(
         to="City",
         on_delete= CASCADE,
+        null= True,
+        blank= True,
         related_name= _("Capital To +"),
         verbose_name= _("Capital"),
     )

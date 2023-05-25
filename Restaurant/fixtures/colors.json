@@ -3,21 +3,70 @@
     "model": "Restaurant.Color",
     "pk": 1,
     "fields": {
-      "color": "Sandwish"
-    }
+      "color": "#E33853"
+    }    
   },
   {
     "model": "Restaurant.Color",
     "pk": 2,
     "fields": {
-      "color": "Pizza"
+      "color": "#C10B28"
     }
   },
   {
     "model": "Restaurant.Color",
     "pk": 3,
     "fields": {
-      "color": "Burgers"
+      "color": "#9D16F1"
+    }
+  },
+  {
+    "model": "Restaurant.Color",
+    "pk": 4,
+    "fields": {
+      "color": "#CEA9FE"
+    }
+  },
+  {
+    "model": "Restaurant.Color",
+    "pk": 5,
+    "fields": {
+      "color": "#FDD601"
+    }
+  },
+  {
+    "model": "Restaurant.Color",
+    "pk": 6,
+    "fields": {
+      "color": "#ECBC00"
+    }
+  },
+  {
+    "model": "Restaurant.Color",
+    "pk": 7,
+    "fields": {
+      "color": "#EACC4A"
+    }
+  },
+  {
+    "model": "Restaurant.Color",
+    "pk": 8,
+    "fields": {
+      "color": "#FEF0A9"
+    }
+  },
+  {
+    "model": "Restaurant.Color",
+    "pk": 9,
+    "fields": {
+      "color": "#0DA96E"
+    }
+  },
+  {
+    "model": "Restaurant.Color",
+    "pk": 10,
+    "fields": {
+      "color": "#8FE3B6"
     }
   }
 ] 

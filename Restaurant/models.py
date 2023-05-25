@@ -26,11 +26,7 @@ class Restaurant(BaseModelName):
     class RestaurantTypes(TextChoices):
         C = "C", _("Coffee")
         F = "F", _("Fast Food")
-    
-    is_best = BooleanField(
-        default= False,
-        verbose_name= _("is Best"),
-    )
+   
     free_shipping = FloatField(
         verbose_name= _("Free shipping"),
     )
@@ -40,33 +36,41 @@ class Restaurant(BaseModelName):
         verbose_name= _("Restaurant Type")
     )
     open_time = TimeField(
+        null= True,
+        blank= True,
         verbose_name= _("Open Time"),
     )
     close_time = TimeField(
+        null= True,
+        blank= True,
         verbose_name= _("Close Time"),
     )
     location = ForeignKey(
         Location,
         on_delete= CASCADE,
+        null= True,
+        blank= True,
         related_name= "Profiles",
         verbose_name= _("Location"),
     )
-    is_nearby = BooleanField(
-        default= False,
-        verbose_name= _("is Nearby"),
-    )
-
+   
     @property
     def users_choiced_count(self) -> int:
         return len(self.Choiced_Users)
 
     @property
+    def Likes(self) -> int:
+        likes = 0
+        for user in self.Choiced_Users:
+            likes = likes + user.likes
+        return int(likes/len(self.Choiced_Users))
+
+    @property
     def Reviews(self) -> float:
         reviews = 0
         for user in self.Choiced_Users:
-            reviews = reviews +user.review
-        return reviews
-
+            reviews = reviews + user.review
+        return reviews/len(self.Choiced_Users)
 
     # @property
     # def is_Nearby(self):
@@ -81,9 +85,14 @@ class Restaurant(BaseModelName):
 
 
 class Color(Model):
+    id = AutoField(
+        primary_key= True,
+        verbose_name= _("ID"),
+    )
     color = ColorField(
         default=8,
         format="hexa",
+        unique= True,
         verbose_name= _("Color"),
     )
 
@@ -98,6 +107,10 @@ class Gradient(Model):
     class GradientTypes(TextChoices):
         LinearGradient = "LG", _("LinearGradient")
 
+    id = AutoField(
+        primary_key= True,
+        verbose_name= _("ID"),
+    )
     class Aligments(TextChoices):
         topRight = "TR", _("topRight")
         bottomLeft = "BL", _("bottomLeft")
@@ -144,14 +157,14 @@ class Logo(BaseModelImage):
         related_name= "Logo",
         verbose_name= _("Restaurant"),
     )
-    color = ForeignKey(
-        Color,
-        null= True,
-        blank= True,
-        on_delete=CASCADE,
-        related_name= "Logos",
-        verbose_name= _("Color"),
-    )
+    # color = ForeignKey(
+    #     Color,
+    #     null= True,
+    #     blank= True,
+    #     on_delete=CASCADE,
+    #     related_name= "Logos",
+    #     verbose_name= _("Color"),
+    # )
     gradient = ForeignKey(
         Gradient,
         null= True,
@@ -167,6 +180,10 @@ class Logo(BaseModelImage):
 
 
 class ColorStep(Model):
+    id = AutoField(
+        primary_key= True,
+        verbose_name= _("ID"),
+    )
     gradient = ForeignKey(
         Gradient,
         on_delete= CASCADE,
@@ -189,7 +206,7 @@ class ColorStep(Model):
         verbose_name_plural= _("Colors Steps")
 
 
-class RestaurantMeal(Model):
+class RestaurantMeal(BaseModel):
     restaurant = ForeignKey(
         Meal,
         on_delete=CASCADE,
@@ -208,6 +225,10 @@ class RestaurantMeal(Model):
     )
 
     @property
+    def image(self):
+        return self.Images[0]
+    
+    @property
     def is_Popular(self) -> bool:
         return False
 
@@ -216,6 +237,7 @@ class RestaurantMeal(Model):
         return slugify(f"{self.pk}")
     
     class Meta:
+        ordering = ["last_updated"]
         unique_together = (
             "restaurant",
             "meal",

@@ -1,0 +1,78 @@
+[
+  {
+    "model": "Restaurant.Logo",
+    "pk": 1,
+    "fields": {
+      "image": "images/Logo/1.png"
+    }    
+  },
+  {
+    "model": "Restaurant.Logo",
+    "pk": 2,
+    "fields": {
+      "image": "images/Logo/2.png"
+    }    
+  },
+  {
+    "model": "Restaurant.Logo",
+    "pk": 3,
+    "fields": {
+      "image": "images/Logo/3.png"
+    }    
+  },
+  {
+    "model": "Restaurant.Logo",
+    "pk": 4,
+    "fields": {
+      "image": "images/Logo/4.png"
+    }    
+  },
+  {
+    "model": "Restaurant.Logo",
+    "pk": 5,
+    "fields": {
+      "gradient": 1,
+      "image": "images/Logo/5.png"
+    }    
+  },
+  {
+    "model": "Restaurant.Logo",
+    "pk": 6,
+    "fields": {
+      "gradient": 1,
+      "image": "images/Logo/6.png"
+    }    
+  },
+  {
+    "model": "Restaurant.Logo",
+    "pk": 7,
+    "fields": {
+      "gradient": 2,
+      "image": "images/Logo/7.png"
+    }    
+  },
+  {
+    "model": "Restaurant.Logo",
+    "pk": 8,
+    "fields": {
+      "gradient": 3,
+      "image": "images/Logo/8.png"
+    }    
+  },
+  {
+    "model": "Restaurant.Logo",
+    "pk": 9,
+    "fields": {
+      "gradient": 4,
+      "image": "images/Logo/9.png"
+    }    
+  },
+  {
+    "model": "Restaurant.Logo",
+    "pk": 10,
+    "fields": {
+      "gradient": 5,
+      "image": "images/Logo/10.png"
+    }    
+  }  
+] 

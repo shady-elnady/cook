@@ -1,18 +1,18 @@
 from django.conf import settings
+
 from .models import User
+from .check_email import check_is_email
 
 
 
 class EmailOrUsernameModelBackend(object):
-    def authenticate(self, username=None, password=None, email=None):
-        if '@' in username:
-            kwargs = {'email': username}
-            kwargs = {'username': username}
-        else:
-            kwargs = {'username': username}
-            kwargs = {'email': email}
+    def authenticate(self, username=None, email=None, password=None):
+        user = None
+        if username is None:
+            user = User.objects.get(email=email)
+        elif email is None:
+            user = User.objects.get(username=username)
         try:
-            user = User.objects.get(**kwargs)
             if user.check_password(password):
                 return user
         except User.DoesNotExist:

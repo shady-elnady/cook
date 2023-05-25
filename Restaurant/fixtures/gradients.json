@@ -1,0 +1,47 @@
+[
+  {
+    "model": "Restaurant.Gradient",
+    "pk": 1,
+    "fields": {
+      "gradient_type": "LG",
+      "begin": "TR",
+      "end": "BL"
+    }    
+  },
+  {
+    "model": "Restaurant.Gradient",
+    "pk": 2,
+    "fields": {
+      "gradient_type": "LG",
+      "begin": "TR",
+      "end": "BL"
+    }    
+  },
+  {
+    "model": "Restaurant.Gradient",
+    "pk": 3,
+    "fields": {
+      "gradient_type": "LG",
+      "begin": "TR",
+      "end": "BL"
+    }    
+  },
+  {
+    "model": "Restaurant.Gradient",
+    "pk": 4,
+    "fields": {
+      "gradient_type": "LG",
+      "begin": "TR",
+      "end": "BL"
+    }    
+  },
+  {
+    "model": "Restaurant.Gradient",
+    "pk": 5,
+    "fields": {
+      "gradient_type": "LG",
+      "begin": "TR",
+      "end": "BL"
+    }    
+  }
+] 

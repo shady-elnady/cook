@@ -1,0 +1,7 @@
+pip install django \
+djangorestframework \
+social-auth-core \
+social-auth-app-django
+
+// For MongoDB
+pip install social-auth-app-django-mongoengine

@@ -1,3 +1,4 @@
+from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
@@ -43,13 +44,11 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = "username"      # e.g: "username", "email"
     EMAIL_FIELD = "email"         # e.g: "email", "primary_email"
-    REQUIRED_FIELDS = ['password']
+    REQUIRED_FIELDS = ['password', "email"]
 
     objects = UsersManager()
     
     id = UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name= _("ID"),)
-    otp_enabled = BooleanField(default=False, verbose_name= _("OTP Enabled"),)
-    otp = CharField(max_length=255, null=True, verbose_name= _("OTP Base32"),)
     phone_regex = RegexValidator(
         regex=r'^\+?1?\d{9,15}$',
         message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.",
@@ -61,6 +60,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True,
         null= True,
         verbose_name= _("mobile"),
+    )
+    otp = CharField(
+        max_length=25,
+        blank=True,
+        null= True,
+        verbose_name= _("OTP"),
     )
     email = EmailField(
         max_length=200,
@@ -176,6 +181,11 @@ class Profile(BaseModel, BaseModelImage):
         on_delete= CASCADE,
         related_name= "Profiles",
         verbose_name= _("Address"),
+    )
+    facebook_link = models.URLField(
+        null=True,
+        blank=True,
+        verbose_name=_("FaceBook Link"),
     )
 
     @property

@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import (
     splash,
+    intro,
     home,
     blog,
     menu,
@@ -22,6 +23,7 @@ app_name = "Restaurant"
 urlpatterns = [
     ## Servies Web Set
     path("", splash, name="Splash"),
+    path("intro/", intro, name="Intro"),
     path("home/", home, name="Home"),
     path("about/", about, name="About"),
     path("blog/", blog, name="Blog"),

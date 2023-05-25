@@ -45,11 +45,8 @@ class UserSerializer(HyperlinkedModelSerializer):
             "id",
             "username",
             "email",
+            "mobile",
             "User_Restaurants",
-            'otp_enabled',
-            'otp_verified',
-            'otp_base32',
-            'otp_auth_url',
             "slug",
         ]
         extra_kwargs = {
@@ -79,7 +76,6 @@ class ProfileSerializer(HyperlinkedModelSerializer):
             "id",
             "user",
             "image",
-            # "phone_number",
             "first_name",
             "family_name",
             "birth_date",

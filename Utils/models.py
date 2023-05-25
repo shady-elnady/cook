@@ -46,13 +46,13 @@ class BaseModel(Model):
         return slugify(f"{self.id}")
 
     class Meta:
+        ordering = ["last_updated"]
         abstract= True
 
 
 class BaseModelName(BaseModel):
     name = CharField(
         max_length= 15,
-        unique= True,
         verbose_name= _("Name"),
     )
 

@@ -1,16 +1,15 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated, IsAdminUser 
+from rest_framework.views import APIView
 
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
 
 from .Utils import otp_generator
-from knox.models import AuthToken
 from django.contrib.auth import login
-from rest_framework import permissions, generics, status
+from rest_framework import permissions, generics, status, serializers
 import requests
-from rest_framework import serializers
+from rest_framework.authtoken.models import Token
 
 from .TwilioMessageHandler import TwilioMessageHandler
 from .Serializer import  RegisterSerializer
@@ -39,6 +38,10 @@ class RegisterViewSet(ModelViewSet):
             status= status.HTTP_201_CREATED,
         )
 
+    def get_queryset(self):
+        raise serializers.ValidationError(
+                'This URL To Register '
+            )
     
 
 def send_otp(mobile, otp_key):
@@ -55,178 +58,3 @@ def send_otp(mobile, otp_key):
     else:
         return False
 
-
-class MobileSendOTP(APIView):
-    def post(self, request, *agrs, **kwargs):
-        try:
-            mobile_number = request.data.get('mobile')
-            user_id = request.data.get('user_id')
-            if mobile_number and user_id:
-                mobile = str(mobile_number)
-                user = User.objects.filter(id__iexact=user_id)
-                if user.exists():
-                    user_data = user.first()
-                    old_otp = user_data.otp
-                    otp_key = str(otp_generator())
-                    new_otp = send_otp(mobile, otp_key)
-                    try :
-                        if request.POST['methodOtp']=="methodOtpWhatsapp":
-                            messagehandler=TwilioMessageHandler(mobile,otp_key).send_otp_via_whatsapp()
-                        else:
-                            messagehandler=TwilioMessageHandler(mobile,otp_key).send_otp_via_message()
-                    except Exception (e):
-                        return Response(
-                            {
-                                'success': False,
-                                'message': f'Error in send OTP: {e}',
-                                'status': status.HTTP_400_BAD_REQUEST,
-                            },
-                            status= status.HTTP_400_BAD_REQUEST,
-                        )
-                        
-                    user_data.mobile = mobile
-                    user_data.otp = new_otp
-                    if old_otp:
-                        user_data.otp_enabled = False
-                        user_data.is_verified = False
-                        user_data.save()
-                        return Response(
-                            {
-                                'success': True,
-                                'message': 'OTP sent successfully, get it',
-                                'status': status.HTTP_200_OK,
-                            },
-                            status= status.HTTP_200_OK,
-                        )
-                    else:
-                        user_data.save()
-                        return Response(
-                            {
-                                "scucess": True,
-                                'message': 'OTP sent successfully, get it',
-                                'status': status.HTTP_200_OK,
-                            },
-                            status= status.HTTP_200_OK,
-                        )
-                else:
-                    return Response(
-                        {
-                            'success': False,
-                            'message': 'User not found ! please register',
-                            'status': status.HTTP_404_NOT_FOUND,
-                        },
-                        status= status.HTTP_400_BAD_REQUEST,
-                    )
-            else:
-                return Response(
-                    {
-                        'success': False,
-                        'message': 'Mobile number and User ID is required',
-                        'status': status.HTTP_400_BAD_REQUEST
-                    },
-                    status= status.HTTP_400_BAD_REQUEST,
-                )
-        except Exception as e:
-            return Response(
-                {
-                    'success': False,
-                    'message': str(e),
-                    'status': status.HTTP_400_BAD_REQUEST,
-                },
-                status= status.HTTP_400_BAD_REQUEST,
-            )
-
-
-# verify otp
-class VerifymobileOTPView(APIView):
-    def post(self, request, format=None):
-        try:
-            otp = request.data.get('otp')
-            user_id = request.data.get('user_id')
-            print(otp, user_id)
-            if otp and user_id:
-                user = User.objects.filter(id__iexact=user_id)
-                if user.exists():
-                    user = user.first()
-                    login(request, user)
-                    if user.otp == otp:
-                        user.otp_enabled = True
-                        user.is_verified = True
-                        user.save()
-                        return Response(
-                            {
-                                'status': True,
-                                'message': 'Login Successfully',
-                                'token': AuthToken.objects.create(user)[1],
-                                'response': {
-                                    'id': user.id,
-                                    'username': user.username,
-                                    'email': user.email,
-                                    'mobile': user.mobile,
-                                    'otp': user.otp,
-                                    'Profile': user.Profile,
-                                },
-                            },
-                            status=status.HTTP_200_OK,
-                        )
-                    else:
-                        return Response(
-                            {
-                            'success': False,
-                            'message': 'OTP does not match'
-                            }, 
-                            status=status.HTTP_400_BAD_REQUEST
-                        )
-                else:
-                    return Response(
-                        {
-                        'success': False,
-                        'message': 'User does not exist'
-                        }, 
-                        status=status.HTTP_403_FORBIDDEN
-                    )
-            else:
-                return Response(
-                    {
-                    'success': False,
-                    'message': 'mobile or OTP is missing'
-                    }, 
-                    status=status.HTTP_403_FORBIDDEN
-                )
-
-        except Exception as e:
-            print(e)
-            return Response(
-                {
-                    'success': False,
-                    'message': str(e),
-                    'details': 'Verifiy OTP Failed'
-                },
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
-
-# logout api view
-class LogoutView(APIView):
-    permission_classes = (permissions.IsAuthenticated)
-
-    def post(self, request, format=None):
-        try:
-            request.user.auth_token.delete()
-            return Response(
-                {
-                    'success': True,
-                    'message': 'Logout successfully',
-                    'status': status.HTTP_200_OK,
-                },
-                status=status.HTTP_200_OK,
-            )
-        except Exception as e:
-            return Response(
-                {
-                    'success': False,
-                    'message': str(e),
-                    'status': status.HTTP_400_BAD_REQUEST,
-                },
-                status= status.HTTP_400_BAD_REQUEST,
-            )

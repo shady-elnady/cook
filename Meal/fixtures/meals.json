@@ -1,0 +1,10 @@
+[
+  {
+    "model": "Meal.Meal",
+    "pk": 1,
+    "fields": {
+      "name": "Burger King",
+      "category": 1
+    }
+  }
+] 

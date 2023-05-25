@@ -3,10 +3,10 @@
     "model": "Category.Category",
     "pk": 1,
     "fields": {
-      "name": "Sandwish",
-      "image": "images/Category/Sandwich.png' %}"
+      "name": "Burgers",
+      "image": "images/Category/Burgers.png' %}"
     }
-  },
+  },  
   {
     "model": "Category.Category",
     "pk": 2,
@@ -19,8 +19,8 @@
     "model": "Category.Category",
     "pk": 3,
     "fields": {
-      "name": "Burgers",
-      "image": "images/Category/Burgers.png' %}"
+      "name": "Sandwish",
+      "image": "images/Category/Sandwich.png' %}"
     }
-  }
+  }  
 ] 

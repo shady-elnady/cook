@@ -1,0 +1,92 @@
+[
+  {
+    "model": "Restaurant.Restaurant",
+    "pk": 1,
+    "fields": {
+      "name": "KFC",
+      "free_shipping": 5.5,
+      "type": "F"
+    }    
+  },
+  {
+    "model": "Restaurant.Restaurant",
+    "pk": 2,
+    "fields": {
+      "name": "Burger King",
+      "free_shipping": 5.5,
+      "type": "F"
+    }    
+  },
+  {
+    "model": "Restaurant.Restaurant",
+    "pk": 3,
+    "fields": {
+      "name": "Taco Bell",
+      "free_shipping": 5.5,
+      "type": "F"
+    }
+  },
+  {
+    "model": "Restaurant.Restaurant",
+    "pk": 4,
+    "fields": {
+      "name": "Subway",
+      "free_shipping": 5.5,
+      "type": "F"
+    }    
+  },
+  {
+    "model": "Restaurant.Restaurant",
+    "pk": 5,
+    "fields": {
+      "name": "McDonald’s",
+      "free_shipping": 5.5,
+      "type": "F"
+    }
+  },
+  {
+    "model": "Restaurant.Restaurant",
+    "pk": 6,
+    "fields": {
+      "name": "Burger King",
+      "free_shipping": 5.5,
+      "type": "F"
+    }
+  },
+  {
+    "model": "Restaurant.Restaurant",
+    "pk": 7,
+    "fields": {
+      "name": "Subway",
+      "free_shipping": 5.5,
+      "type": "F"
+    }
+  },
+  {
+    "model": "Restaurant.Restaurant",
+    "pk": 8,
+    "fields": {
+      "name": "Burger King",
+      "free_shipping": 5.5,
+      "type": "F"
+    }
+  },
+  {
+    "model": "Restaurant.Restaurant",
+    "pk": 9,
+    "fields": {
+      "name": "Subway",
+      "free_shipping": 5.5,
+      "type": "F"
+    }
+  },
+  {
+    "model": "Restaurant.Restaurant",
+    "pk": 10,
+    "fields": {
+      "name": "Starbucks",
+      "free_shipping": 5.5,
+      "type": "F"
+    }
+  }
+] 

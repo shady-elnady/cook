@@ -50,14 +50,12 @@ CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 THIRD_LIBRARIES= [
-    'rest_framework',
-    'knox',
+    'rest_framework', # Django rest framework (drf)
+    'rest_framework.authtoken', # Adding token based authentication from drf
+    'sslserver',
+    'social_django', # Python social auth django app
     'django_filters',
     'corsheaders',
-    # 'colorfield ',
-    # 'rest_pyotp',
-    # 'drf_yasg',
-    # 'rest_framework_simplejwt',
 ]
 
 MY_APP= [
@@ -103,6 +101,8 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
     # for corsheaders
     'corsheaders.middleware.CorsMiddleware',
+    # for social
+    'social_django.middleware.SocialAuthExceptionMiddleware', 
 ]
 
 ROOT_URLCONF = 'Config.urls'
@@ -120,6 +120,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
             ],
         },
     },
@@ -226,10 +227,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# LOGIN_URL = reverse_lazy('User:LogIn')
-# LOGIN_REDIRECT_URL = reverse_lazy('Quran:Home')
-# LOGOUT_REDIRECT_URL = reverse_lazy('User:LogIn')
-
 ####
 ADMINS = (
     ('Shady', 'shadyelnady@gmail.com'),
@@ -260,39 +257,42 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-    #     'rest_framework.permissions.IsAuthenticated',
-    # ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.IsAuthenticated',
+    ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        'knox.auth.TokenAuthentication',
-    ], ## knox Library
+        'rest_framework.authentication.TokenAuthentication'
+    ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     # 'EXCEPTION_HANDLER': 'API.exceptions.django_error_handler'  ## Excepitions
 
 }
 
 
-REST_KNOX = {
-    'USER_SERIALIZER': 'API.Serializer.UserSerializer',
-    'TOKEN_TTL': timedelta(days=1),
-}
-
 ## Twilio
-ACCOUNT_SID='AC0a90271b39b670a662b4ed8c08d775e9'
-AUTH_TOKEN='3b6e1f349f81a19e8cfed301b6f828fa'
+# ACCOUNT_SID='AC0a90271b39b670a662b4ed8c08d775e9'
+# AUTH_TOKEN='3b6e1f349f81a19e8cfed301b6f828fa'
+# COUNTRY_CODE='+2'
+# TWILIO_WHATSAPP_NUMBER='whatsapp:+14155238886'
+# TWILIO_PHONE_NUMBER='+12525184301'
+# TWILIO_PHONE_NUMBER='+12525184301'
+ACCOUNT_SID='AC581b79873a392165b31f7429d2fcfcfb'
+AUTH_TOKEN='d5c961c16b402d455d56e0930cfe6bfa'
 COUNTRY_CODE='+2'
 TWILIO_WHATSAPP_NUMBER='whatsapp:+14155238886'
 TWILIO_PHONE_NUMBER='+12525184301'
+TWILIO_PHONE_NUMBER='+13156673957'
 
 ##
 LOGIN_URL = reverse_lazy('User:LogIn')
-LOGIN_REDIRECT_URL = reverse_lazy('Restaurant:Home')
-LOGOUT_REDIRECT_URL = reverse_lazy('User:LogIn')
-
+LOGIN_REDIRECT_URL = reverse_lazy('Restaurant:Intro')
+LOGOUT_REDIRECT_URL = reverse_lazy('User:Splash')
+LOGOUT_URL = reverse_lazy('User:LogOut')
 
 
 ## SMTP Configure
@@ -308,4 +308,71 @@ DEFAULT_FROM_EMAIL = 'shadyelnady.gmail.com'
 AUTHENTICATION_BACKENDS = (
     'User.backends.EmailOrUsernameModelBackend',
     'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.google.GooglePlusAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
 )
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'API.save_profile',  # <--- set the path to the function
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',   
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_by_email',
+)
+
+## Google
+# OAuth2
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '651914112561-qc7gkks9ahs8tvukdvu7hnfp8uco9pgb.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+
+# for Sign In
+SOCIAL_AUTH_GOOGLE_PLUS_KEY = '...'
+SOCIAL_AUTH_GOOGLE_PLUS_SECRET = '...'
+
+# Google OAuth2 (google-oauth2)
+SOCIAL_AUTH_GOOGLE_OAUTH2_IGNORE_DEFAULT_SCOPE = True
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    'https://www.googleapis.com/auth/userinfo.email',
+    'https://www.googleapis.com/auth/userinfo.profile'
+]
+
+# Google+ SignIn (google-plus)
+SOCIAL_AUTH_GOOGLE_PLUS_IGNORE_DEFAULT_SCOPE = True
+SOCIAL_AUTH_GOOGLE_PLUS_SCOPE = [
+    'https://www.googleapis.com/auth/plus.login',
+    'https://www.googleapis.com/auth/userinfo.email',
+    'https://www.googleapis.com/auth/userinfo.profile'
+]
+
+## FaceBook
+# OAuth2
+SOCIAL_AUTH_FACEBOOK_KEY = '198207789800405'
+SOCIAL_AUTH_FACEBOOK_SECRET = '8688356e573c3fa9c76acbb7d81dc62d'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'profile']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+  'locale': 'ru_RU',
+  'fields': 'id, name, email, age_range'
+}
+
+
+# add this
+SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
+    ('name', 'name'),
+    ('email', 'email'),
+    ('picture', 'picture'),
+    ('link', 'profile_url'),
+]
+
+SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.10'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_USE_DEPRECATED_API = True
+SOCIAL_AUTH_GOOGLE_PLUS_USE_DEPRECATED_API = True
+
