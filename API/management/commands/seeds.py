@@ -4,12 +4,23 @@ import random
 
 from django.core.management.base import BaseCommand
 from django.core.management import call_command
+from django.conf import settings
 
+
+def mkDir(directory):
+    if not os.path.exists(directory):
+            # If it doesn't exist, create it
+            os.makedirs(directory)
 
 class Command(BaseCommand):
     help = "Creates initial models"
 
     def handle(self, *args, **options):
+
+        mkDir(os.path.join(settings.MEDIA_ROOT, "DataBase"))
+        mkDir(os.path.join(settings.MEDIA_ROOT, "media"))
+        mkDir(os.path.join(settings.MEDIA_ROOT, "media", "images"))
+       
         ### 
         works = [
             "makemigrations",

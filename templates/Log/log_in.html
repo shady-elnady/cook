@@ -13,18 +13,18 @@
   <form method="post" action="{% url 'User:LogIn' %}" autocomplete="off" >
     {% csrf_token %}
     <div class="user-box">
-      <input type="text" name="username"  id="{{form.username.id}}" autocomplete="off" required id="{{form.username.id}}" />
+      <input type="text" name="username"  autocomplete="off" required />
       <label>Username</label>
     </div>
     <div class="user-box">
-      <input type="password" name="password" autocomplete="off" required id="{{form.password.id}}" />
+      <input type="password" name="password" autocomplete="off" required />
       <label>Password</label>
     </div>
 
     
     
     <input type="submit" id="submit" value="aaaaa" style="visibility: hidden;" />
-    <a href="#" type="submit" onclick="click_log()">
+    <a type="submit" onclick="click_log()">
       <span></span>
       <span></span>
       <span></span>
@@ -40,8 +40,9 @@
 
     function click_log() {
       submit_btn.click();
+      console.log("shady");
     }
-
+    
   </script>
   
 </body>
