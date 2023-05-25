@@ -24,7 +24,7 @@
     
     
     <input type="submit" id="submit" value="aaaaa" style="visibility: hidden;" />
-    <a href="#" type="submit" >
+    <a href="#" type="submit" onclick="click_log()">
       <span></span>
       <span></span>
       <span></span>
@@ -35,6 +35,14 @@
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
 </div>
+  <script>
+    const submit_btn = document.querySelector("#submit");
+
+    function click_log() {
+      submit_btn.click();
+    }
+
+  </script>
   
 </body>
 </html>
