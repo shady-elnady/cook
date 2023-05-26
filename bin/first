@@ -1,14 +1,11 @@
 #!/bin/bash
 
-python manage.py makemigrations
-python manage.py migrate
+python manage.py seeds
 DJANGO_SUPERUSER_PASSWORD=Shady12345 ./manage.py createsuperuser \
     --no-input \
     --username=Shady \
     --email=shadyelnady@gmail.com.com
 
 run python manage.py collectstatic --noinput  # Collect static
-
-python manage.py seeds
 
 python manage.py runserver

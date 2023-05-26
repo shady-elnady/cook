@@ -261,7 +261,7 @@ class RestaurantMealSize(BaseModel):
         M = "M", _("M")
         S = "S", _("S")
    
-    restaurant_Meal = ForeignKey(
+    restaurant_meal = ForeignKey(
         RestaurantMeal,
         on_delete= CASCADE,
         related_name= "Restaurant_Meals_Sizes",

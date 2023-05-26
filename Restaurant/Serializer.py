@@ -94,7 +94,7 @@ class RestaurantMealSizeSerializer(HyperlinkedModelSerializer):
         fields = [
             "url",
             "id",
-            "restaurant_Meal",
+            "restaurant_meal",
             "size",
             "price",
             "currency",
