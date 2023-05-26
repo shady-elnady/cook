@@ -1,0 +1,32 @@
+[
+  {
+    "model": "Restaurant.RestaurantMealSize",
+    "pk": 1,
+    "fields": {
+      "restaurant_meal": 1,
+      "size": "L",
+      "price": 5.99,
+      "currency": 1
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMealSize",
+    "pk": 2,
+    "fields": {
+      "restaurant_meal": 1,
+      "size": "M",
+      "price": 5.99,
+      "currency": 1
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMealSize",
+    "pk": 3,
+    "fields": {
+      "restaurant_meal": 1,
+      "size": "S",
+      "price": 5.99,
+      "currency": 1
+    }    
+  }
+] 

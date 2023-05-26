@@ -6,7 +6,7 @@ from rest_framework.serializers import (
     ValidationError,
  )
 from rest_framework.serializers import  HyperlinkedModelSerializer
-from Location.Serializer import LocationSerializer
+from Address.Serializer import AddressSerializer
 
 from Restaurant.Serializer import RestaurantSerializer
 
@@ -67,7 +67,7 @@ class UserSerializer(HyperlinkedModelSerializer):
 class ProfileSerializer(HyperlinkedModelSerializer):
     user = UserSerializer(many= False)
     language = LanguageSerializer(many= False)
-    location = LocationSerializer(many= False)
+    address = AddressSerializer(many= False)
 
     class Meta:
         model = Profile
@@ -83,7 +83,7 @@ class ProfileSerializer(HyperlinkedModelSerializer):
             "language",
             "Full_Name",
             "age",
-            "location",
+            "address",
             "created_date",
             "last_updated",
             "slug",

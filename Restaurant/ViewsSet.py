@@ -3,12 +3,14 @@ from rest_framework import viewsets, filters
 # from django_filters import DjangoFilterBackend
 from rest_framework.permissions import IsAuthenticated, IsAdminUser 
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication, BasicAuthentication
+import django_filters.rest_framework
 
-from .models import Color, ColorStep, Gradient, Logo, Restaurant, RestaurantMeal, RestaurantMealSize, RestaurantMealImage
+from .models import Color, ColorStep, Gradient, Hospitality, Logo, Restaurant, RestaurantMeal, RestaurantMealSize, RestaurantMealImage
 from .Serializer import (
     ColorSerializer,
     ColorStepSerializer,
     GradientSerializer,
+    HospitalitySerializer,
     LogoSerializer,
     RestaurantMealImageSerializer,
     RestaurantMealSizeSerializer,
@@ -23,13 +25,15 @@ class RestaurantViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
     filter_backends = (
-        filters.OrderingFilter,
-        # DjangoFilterBackend,
+        filters.OrderingFilter, # http://example.com/api/users?ordering=account,username
+        filters.SearchFilter,  # http://example.com/api/users?search=russell
+        django_filters.rest_framework.DjangoFilterBackend
     )
-     # Explicitly specify which fields the API may be ordered against
-    ordering_fields = ('id', 'created_date', 'name')
+    ordering_fields = ('id', 'created_date', 'last_updated', 'is_Opened', 'Choiced_Users')
+    filterset_fields = ['id', 'created_date', 'last_updated', 'is_Opened']
+    search_fields = ['name', 'type', 'is_Opened']
     # This will be used as the default ordering
-    ordering = ('last_updated')
+    ordering = ('-last_updated', 'is_Opened')
 
     # # def get_queryset(self):
     # #     is_best = self.kwargs['is_best']
@@ -39,19 +43,38 @@ class RestaurantViewSet(ModelViewSet):
     # #     return queryset
  
 
+class HospitalityViewSet(ModelViewSet):
+    queryset = Hospitality.objects.all()
+    serializer_class = HospitalitySerializer
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
+    filter_backends = (
+        filters.OrderingFilter, # http://example.com/api/users?ordering=account,username
+        filters.SearchFilter,  # http://example.com/api/users?search=russell
+        django_filters.rest_framework.DjangoFilterBackend
+    )
+    ordering_fields = ('id', 'created_date', 'last_updated')
+    filterset_fields = ['id', 'created_date', 'last_updated']
+    search_fields = ['name',]
+    # This will be used as the default ordering
+    ordering = ('-last_updated')
+ 
+
 class RestaurantMealViewSet(ModelViewSet):
     queryset = RestaurantMeal.objects.all()
     serializer_class = RestaurantMealSerializer
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
     filter_backends = (
-        filters.OrderingFilter,
-        # DjangoFilterBackend,
+        filters.OrderingFilter, # http://example.com/api/users?ordering=account,username
+        filters.SearchFilter,  # http://example.com/api/users?search=russell
+        django_filters.rest_framework.DjangoFilterBackend
     )
-     # Explicitly specify which fields the API may be ordered against
-    ordering_fields = ('id', 'created_date', 'name')
+    ordering_fields = ('id', 'created_date', 'last_updated', 'orders_count')
+    filterset_fields = ['id', 'created_date', 'last_updated', 'orders_count']
+    search_fields = ['name', 'meal__name', 'restaurant__name']
     # This will be used as the default ordering
-    ordering = ('last_updated')
+    ordering = ('-last_updated')
 
 
 class RestaurantMealSizeViewSet(ModelViewSet):
@@ -60,13 +83,15 @@ class RestaurantMealSizeViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
     filter_backends = (
-        filters.OrderingFilter,
-        # DjangoFilterBackend,
+        filters.OrderingFilter, # http://example.com/api/users?ordering=account,username
+        filters.SearchFilter,  # http://example.com/api/users?search=russell
+        django_filters.rest_framework.DjangoFilterBackend
     )
-     # Explicitly specify which fields the API may be ordered against
-    ordering_fields = ('id', 'created_date', 'name')
+    ordering_fields = ('id', 'created_date', 'last_updated')
+    filterset_fields = ['id', 'created_date', 'last_updated', 'price']
+    search_fields = ['restaurant_Meal__name', ]
     # This will be used as the default ordering
-    ordering = ('last_updated')
+    ordering = ('-last_updated')
 
 
 class RestaurantMealImageViewSet(ModelViewSet):
@@ -75,13 +100,11 @@ class RestaurantMealImageViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
     filter_backends = (
-        filters.OrderingFilter,
-        # DjangoFilterBackend,
+        filters.OrderingFilter, # http://example.com/api/users?ordering=account,username
+        filters.SearchFilter,  # http://example.com/api/users?search=russell
+        django_filters.rest_framework.DjangoFilterBackend
     )
-     # Explicitly specify which fields the API may be ordered against
-    ordering_fields = ('id', 'created_date', 'name')
-    # This will be used as the default ordering
-    ordering = ('last_updated')
+    search_fields = ['restaurant_meal__name', ]
 
 
 class ColorViewSet(ModelViewSet):
@@ -89,14 +112,6 @@ class ColorViewSet(ModelViewSet):
     serializer_class = ColorSerializer
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
-    filter_backends = (
-        filters.OrderingFilter,
-        # DjangoFilterBackend,
-    )
-     # Explicitly specify which fields the API may be ordered against
-    ordering_fields = ('id', 'created_date', 'name')
-    # This will be used as the default ordering
-    ordering = ('last_updated')
 
 
 class ColorStepViewSet(ModelViewSet):
@@ -105,13 +120,11 @@ class ColorStepViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
     filter_backends = (
-        filters.OrderingFilter,
-        # DjangoFilterBackend,
+        filters.OrderingFilter, # http://example.com/api/users?ordering=account,username
+        filters.SearchFilter,  # http://example.com/api/users?search=russell
+        django_filters.rest_framework.DjangoFilterBackend
     )
-     # Explicitly specify which fields the API may be ordered against
-    ordering_fields = ('id', 'created_date', 'name')
-    # This will be used as the default ordering
-    ordering = ('last_updated')
+    search_fields = ['color__color', ]
 
 
 class LogoViewSet(ModelViewSet):
@@ -119,14 +132,7 @@ class LogoViewSet(ModelViewSet):
     serializer_class = LogoSerializer
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
-    filter_backends = (
-        filters.OrderingFilter,
-        # DjangoFilterBackend,
-    )
-     # Explicitly specify which fields the API may be ordered against
-    ordering_fields = ('id', 'created_date', 'name')
-    # This will be used as the default ordering
-    ordering = ('last_updated')
+   
 
 
 class GradientViewSet(ModelViewSet):
@@ -134,13 +140,3 @@ class GradientViewSet(ModelViewSet):
     serializer_class = GradientSerializer
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
-    filter_backends = (
-        filters.OrderingFilter,
-        # DjangoFilterBackend,
-    )
-     # Explicitly specify which fields the API may be ordered against
-    ordering_fields = ('id', 'created_date', 'name')
-    # This will be used as the default ordering
-    ordering = ('last_updated')
-
- 

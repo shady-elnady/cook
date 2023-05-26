@@ -9,6 +9,7 @@ from django.db.models import (
 )
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
+from Address.models import Address
 from Driver.models import Driver
 from Payment.models import PaymentMethod
 
@@ -20,7 +21,12 @@ from Restaurant.models import Restaurant, RestaurantMealSize
 
 
 class Order(BaseModel):
-    user = ForeignKey(
+
+    class ORDER_CHOICES(models.TextChoices):
+        P = "P", _("pending")
+        C = "C", _("completed")
+
+    customer = ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete= CASCADE,
         related_name= "Orders",
@@ -32,13 +38,38 @@ class Order(BaseModel):
         related_name= "Orders",
         verbose_name= _("Payment Method"),
     )
+    status = models.CharField(
+        max_length= 2,
+        choices=ORDER_CHOICES.choices,
+        default= ORDER_CHOICES.P,
+        verbose_name= _("Status"),
+    )
+    is_paid = models.BooleanField(
+        default=False,
+        verbose_name= _("is Paid"),
+    )
+    address = models.ForeignKey(
+        Address,
+        related_name="Orders",
+        on_delete=models.CASCADE,
+        verbose_name= _("Address"),
+    )
 
-    # @property
-    # def Total_order_price(self) -> float:
-    #     total = 0
-    #     for meal in self.Order_Meals :
-    #         total = total + meal.Total_meal_price()
-    #     return total
+    @property
+    def Total_order_price(self) -> float:
+        total = 0
+        for meal in self.Order_Meals :
+            total = total + meal.Total_meal_price()
+        return total
+
+    @staticmethod
+    def create_order(customer, order_number, address, is_paid=False):
+        order = Order()
+        order.customer = customer
+        order.address = address
+        order.is_paid = is_paid
+        order.save()
+        return order
 
     class Meta:
         verbose_name= _("Order")
@@ -61,10 +92,27 @@ class OrderMeal(BaseModel):
     quantity = PositiveSmallIntegerField(
         verbose_name= _("Quantity"),
     )
+    price = FloatField(
+        editable= False, 
+        verbose_name= _("Price"),
+    )
 
-    # @property
-    # def Total_meal_price(self) -> float:
-    #     return self.meal.price * self.quantity
+    @staticmethod
+    def create_order_item(order, meal, quantity, total):
+        order_item = OrderMeal()
+        order_item.order = order
+        order_item.meal = meal
+        order_item.quantity = quantity
+        order_item.save()
+        return order_item
+
+    @property
+    def Total_meal_price(self) -> float:
+        return self.price * self.quantity
+
+    def save(self, *args, **kwargs):
+        self.price = self.meal.price
+        super().save(*args, **kwargs)
 
     class Meta:
         unique_together = (

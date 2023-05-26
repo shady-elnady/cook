@@ -1,7 +1,7 @@
 from rest_framework.serializers import HyperlinkedModelSerializer
 
-from .models import Color, ColorStep, Gradient, Logo, Restaurant, RestaurantMeal, RestaurantMealSize, RestaurantMealImage
-from Location.Serializer import LocationSerializer
+from .models import Color, ColorStep, Gradient, Hospitality, Logo, Restaurant, RestaurantMeal, RestaurantMealSize, RestaurantMealImage
+from Address.Serializer import AddressSerializer
 from Meal.Serializer import MealSerializer
 from Category.Serializer import CategorySerializer
 from Payment.Serializer import CurrencySerializer 
@@ -55,7 +55,6 @@ class LogoSerializer(HyperlinkedModelSerializer):
         fields = [
             "url",
             "restaurant",
-            # "color",
             "gradient",
             "image",
         ]
@@ -72,6 +71,20 @@ class RestaurantMealImageSerializer(HyperlinkedModelSerializer):
             "slug",
         ]
 
+
+class HospitalitySerializer(HyperlinkedModelSerializer):
+    currency = CurrencySerializer(many= False)
+    
+    class Meta:
+        model = Hospitality
+        fields = [
+            "url",
+            "id",
+            "name",
+            "created_date",
+            "last_updated",
+            "slug",
+        ]
 
 class RestaurantMealSizeSerializer(HyperlinkedModelSerializer):
     currency = CurrencySerializer(many= False)
@@ -100,13 +113,16 @@ class RestaurantMealSerializer(HyperlinkedModelSerializer):
         model = RestaurantMeal
         fields = [
             "url",
+            "id",
+            "name",
             "restaurant",
             "meal",
             "Restaurant_Meals_Sizes",
-            "is_popular",
-            "is_Popular",
+            "orders_count",
+            "primary_image",
             "images",
-            "image",
+            "created_date",
+            "last_updated",
             "slug",
         ]
 
@@ -114,7 +130,7 @@ class RestaurantMealSerializer(HyperlinkedModelSerializer):
 class RestaurantSerializer(HyperlinkedModelSerializer):
     Restaurant_Meals = MealSerializer(many=True)
     Categories = CategorySerializer(many= True)
-    location = LocationSerializer(many= False)
+    address = AddressSerializer(many= False)
     Logo= LogoSerializer(many= False)
 
     class Meta:
@@ -133,9 +149,10 @@ class RestaurantSerializer(HyperlinkedModelSerializer):
             "reviews",
             "Categories",
             "Logo",
-            "location",
+            "address",
             "Reviews",
             "Likes",
+            "is_Opened",
             "created_date",
             "last_updated",
             "users_choiced_count", ##

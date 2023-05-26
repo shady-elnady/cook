@@ -1,5 +1,7 @@
 from rest_framework.serializers import HyperlinkedModelSerializer
 
+from Address.Serializer import AddressSerializer
+
 from .models import Order, OrderMeal, OrderRateDriver, OrderRateRestaurant
 from Restaurant.Serializer import RestaurantMealSizeSerializer, RestaurantSerializer
 from Driver.Serializer import DriverSerializer
@@ -19,7 +21,7 @@ class OrderMealSerializer(HyperlinkedModelSerializer):
             "order",
             "meal",
             "quantity",
-            # "Total_meal_price",
+            "Total_meal_price",
             "created_date",
             "last_updated",
             "slug",
@@ -77,18 +79,22 @@ class OrderSerializer(HyperlinkedModelSerializer):
     Order_Rate_Driver = OrderRateDriverSerializer(many = False)
     Order_Rate_Restaurant = OrderRateRestaurantSerializer(many = False)
     payment_method = PaymentMethodSerializer(many = False)
-
+    address = AddressSerializer(many= False)
+    
     class Meta:
         model = Order
         fields = [
             "url",
             "id",
-            "user",
+            "customer",
             "payment_method",
+            "status",
+            "is_paid",
             "Order_Meals",
+            "address",
             "Order_Rate_Driver",
             "Order_Rate_Restaurant",
-            # "Total_order_price",
+            "Total_order_price",
             "created_date",
             "last_updated",
             "slug",

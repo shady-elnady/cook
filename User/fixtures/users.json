@@ -1,0 +1,70 @@
+[
+  {
+    "model": "User.User",
+    "fields": {
+      "username": "Dora Perry",
+      "email": "dora_perry@gmail.com",
+      "is_active": false,
+      "is_verified": false,
+      "is_staff": false,
+      "is_superuser": false,
+      "Profile": {
+        "first_name": "Dora",
+        "family_name": "Perry",
+        "language": "F",
+        "images": "images/Profile/1.png"
+      }
+    }
+  },
+  {
+    "model": "User.User",
+    "fields": {
+      "username": "Laura Smith",
+      "email": "laura_smith@gmail.com",
+      "is_active": false,
+      "is_verified": false,
+      "is_staff": false,
+      "is_superuser": false,
+      "Profile": {
+        "first_name": "Laura",
+        "family_name": "Smith",
+        "language": "F",
+        "images": "images/Profile/1.png"
+      }
+    }
+  },
+  {
+    "model": "User.User",
+    "fields": {
+      "username": "Victoria Champain",
+      "email": "victoria_champain@gmail.com",
+      "is_active": false,
+      "is_verified": false,
+      "is_staff": false,
+      "is_superuser": false,
+      "Profile": {
+        "first_name": "Victoria",
+        "family_name": "Champain",
+        "language": "F",
+        "images": "images/Profile/1.png"
+      }
+    }
+  },
+  {
+    "model": "User.User",
+    "fields": {
+      "username": "Eleanor Summers",
+      "email": "eleanor_summers@gmail.com",
+      "is_active": false,
+      "is_verified": false,
+      "is_staff": false,
+      "is_superuser": false,
+      "Profile": {
+        "first_name": "Eleanor",
+        "family_name": "Summers",
+        "language": "F",
+        "images": "images/Profile/1.png"
+      }
+    }
+  }
+]

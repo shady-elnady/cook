@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "name": "Burgers",
-      "image": "images/Category/Burgers.png' %}"
+      "image": "images/Category/1.png' %}"
     }
   },  
   {
@@ -12,7 +12,7 @@
     "pk": 2,
     "fields": {
       "name": "Pizza",
-      "image": "images/Category/Pizza.png' %}"
+      "image": "images/Category/2.png' %}"
     }
   },
   {
@@ -20,7 +20,7 @@
     "pk": 3,
     "fields": {
       "name": "Sandwish",
-      "image": "images/Category/Sandwich.png' %}"
+      "image": "images/Category/3.png' %}"
     }
   }  
 ] 

@@ -7,12 +7,15 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status, filters
 from django.core.exceptions import ObjectDoesNotExist
+import django_filters.rest_framework
 
 from .models import  Address, Street, Area, City, Governorate, Country
-from .Serializer import AddressSerializer, AreaSerializer, CitySerializer, CountrySerializer, GovernorateSerializer, StreetSerializer
+from .Serializer import (
+    AddressSerializer, AreaSerializer, CitySerializer,
+    CountrySerializer, GovernorateSerializer, StreetSerializer,
+)
 
 # import pyotp
-
 
 class AddressViewSet(ModelViewSet):
     """
@@ -22,31 +25,33 @@ class AddressViewSet(ModelViewSet):
     serializer_class = AddressSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
     filter_backends = (
-        filters.OrderingFilter,
-        # DjangoFilterBackend,
+        filters.OrderingFilter, # http://example.com/api/users?ordering=account,username
+        filters.SearchFilter,  # http://example.com/api/users?search=russell
+        django_filters.rest_framework.DjangoFilterBackend
     )
-     # Explicitly specify which fields the API may be ordered against
-    ordering_fields = ('id', 'created_date', 'name')
+    ordering_fields = ('id', 'created_date', 'last_updated')
+    filterset_fields = ['id', 'created_date', 'last_updated']
+    search_fields = ['name', 'native']
     # This will be used as the default ordering
-    ordering = ('last_updated')
+    ordering = ('-last_updated')
 
     def get_queryset(self):
         return Address.objects.all().filter(user=self.request.user)
 
+"""
+    ?page=1&size=15&sorters[0]
 
+    http://example.com/api/users?ordering=account,username
+
+"""
 class StreetViewSet(ModelViewSet):
     queryset = Street.objects.all()
     serializer_class = StreetSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = (
         filters.OrderingFilter,
-        # DjangoFilterBackend,
     )
-     # Explicitly specify which fields the API may be ordered against
-    ordering_fields = ('id', 'created_date', 'name')
-    # This will be used as the default ordering
-    ordering = ('last_updated')
-
+    
     def get_queryset(self):
         return Street.objects.all().filter(user=self.request.user)
 
@@ -57,9 +62,8 @@ class AreaViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
     filter_backends = (
         filters.OrderingFilter,
-        # DjangoFilterBackend,
     )
-     # Explicitly specify which fields the API may be ordered against
+    # Explicitly specify which fields the API may be ordered against
     ordering_fields = ('id', 'created_date', 'name')
     # This will be used as the default ordering
     ordering = ('last_updated')

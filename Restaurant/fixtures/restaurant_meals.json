@@ -1,0 +1,200 @@
+[
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 1,
+    "fields": {
+      "name": "Double BBQ bacon cheese burger",
+      "restaurant": 1,
+      "meal": 1
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 2,
+    "fields": {
+      "name": "Prime Beef - Pizza Beautiful",
+      "restaurant": 1,
+      "meal": 1
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 3,
+    "fields": {
+      "name": "Burger King",
+      "restaurant": 1,
+      "meal": 1
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 4,
+    "fields": {
+      "name": "Burger King",
+      "restaurant": 1,
+      "meal": 1
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 5,
+    "fields": {
+      "name": "Burger King",
+      "restaurant": 1,
+      "meal": 1
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 6,
+    "fields": {
+      "name": "Burger King",
+      "restaurant": 1,
+      "meal": 1
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 7,
+    "fields": {
+      "name": "Burger King",
+      "restaurant": 1,
+      "meal": 1
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 8,
+    "fields": {
+      "name": "Combo BBQ Bacon Cheese Burger",
+      "restaurant": 1,
+      "meal": 3
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 9,
+    "fields": {
+      "name": "Combo Chicken Crispy 3pcs",
+      "restaurant": 1,
+      "meal": 3
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 10,
+    "fields": {
+      "name": "Chicken BBQ",
+      "restaurant": 1,
+      "meal": 3
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 11,
+    "fields": {
+      "name": "Combo BBQ Bacon Cheese Burger",
+      "restaurant": 1,
+      "meal": 2
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 12,
+    "fields": {
+      "name": "Combo Tender Grill  Burger",
+      "restaurant": 1,
+      "meal": 2
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 13,
+    "fields": {
+      "name": "Combo spicy tender",
+      "restaurant": 1,
+      "meal": 2
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 14,
+    "fields": {
+      "name": "Potato chip Burrger cheese",
+      "restaurant": 1,
+      "meal": 1
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 15,
+    "fields": {
+      "name": "Singles BBQ bacon cheese burger",
+      "restaurant": 1,
+      "meal": 1
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 16,
+    "fields": {
+      "name": "Extreme cheese whopper JR",
+      "restaurant": 1,
+      "meal": 1
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 17,
+    "fields": {
+      "name": "Burger King",
+      "restaurant": 1,
+      "meal": 1
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 18,
+    "fields": {
+      "name": "Burger King",
+      "restaurant": 1,
+      "meal": 1
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 19,
+    "fields": {
+      "name": "Burger King",
+      "restaurant": 1,
+      "meal": 1
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 20,
+    "fields": {
+      "name": "Burger King",
+      "restaurant": 1,
+      "meal": 1
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 21,
+    "fields": {
+      "name": "Burger King",
+      "restaurant": 1,
+      "meal": 1
+    }    
+  },
+  {
+    "model": "Restaurant.RestaurantMeal",
+    "pk": 22,
+    "fields": {
+      "name": "Burger King",
+      "restaurant": 1,
+      "meal": 1
+    }    
+  }
+] 

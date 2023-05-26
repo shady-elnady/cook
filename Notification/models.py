@@ -11,12 +11,22 @@ from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 
 from Utils.models import BaseModel
-
+from User.models import User
 
 # Create your mofrom django.utils.text import slugify
 
 
 class Notification(BaseModel):
+    user = ForeignKey(
+        User,
+        on_delete= CASCADE,
+        related_name= "Notifications",
+        verbose_name= _("User"),
+    )
+    meassage = TextField(
+        max_length= 200,
+        verbose_name= _("Meassage")
+    )
 
     class Meta:
         verbose_name= _("Notification")

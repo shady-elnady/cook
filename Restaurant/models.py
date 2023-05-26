@@ -5,20 +5,27 @@ from django.db.models import (
     URLField,BooleanField, CharField,
     ForeignKey, DateField, EmailField,
     DateTimeField, ImageField, ManyToManyField,
-    SET_NULL, CASCADE, TimeField,
+    SET_NULL, CASCADE, TimeField, SmallIntegerField,
 )
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
+from datetime import datetime
 from colorfield.fields import ColorField
 
+from Address.models import Address
 from Utils.models import BaseModel, BaseModelImage, BaseModelName
-from Location.models import Location
 from Category.models import Category
 from Meal.models import Meal
 from Payment.models import Currency
 
 
 # Create your mofrom django.utils.text import slugify
+
+
+class Hospitality(BaseModelName):
+    class Meta:
+        verbose_name= _("Hospitality")
+        verbose_name_plural= _("Hospitalities")
 
 
 class Restaurant(BaseModelName):
@@ -45,19 +52,29 @@ class Restaurant(BaseModelName):
         blank= True,
         verbose_name= _("Close Time"),
     )
-    location = ForeignKey(
-        Location,
+    address = ForeignKey(
+        Address,
         on_delete= CASCADE,
         null= True,
         blank= True,
-        related_name= "Profiles",
-        verbose_name= _("Location"),
+        related_name= "Restaurants",
+        verbose_name= _("Address"),
+    )
+    hospitalities = ManyToManyField(
+        Hospitality,
+        related_name= "+",
+        verbose_name= _("Hospitalities")
     )
    
     @property
     def users_choiced_count(self) -> int:
         return len(self.Choiced_Users)
 
+    @property
+    def is_Opened(self) -> bool:
+        return self.close_time > datetime.now().time() > self.open_time 
+    ## datetime.now().strftime('%H:%M:%S')
+    
     @property
     def Likes(self) -> int:
         likes = 0
@@ -157,14 +174,6 @@ class Logo(BaseModelImage):
         related_name= "Logo",
         verbose_name= _("Restaurant"),
     )
-    # color = ForeignKey(
-    #     Color,
-    #     null= True,
-    #     blank= True,
-    #     on_delete=CASCADE,
-    #     related_name= "Logos",
-    #     verbose_name= _("Color"),
-    # )
     gradient = ForeignKey(
         Gradient,
         null= True,
@@ -206,7 +215,7 @@ class ColorStep(Model):
         verbose_name_plural= _("Colors Steps")
 
 
-class RestaurantMeal(BaseModel):
+class RestaurantMeal(BaseModelName):
     restaurant = ForeignKey(
         Meal,
         on_delete=CASCADE,
@@ -219,18 +228,20 @@ class RestaurantMeal(BaseModel):
         related_name= "Restaurants",
         verbose_name= _("Meal"),
     )
-    is_popular = BooleanField(
-        default= False,
-        verbose_name= _("is Popular"),
+    orders_count = SmallIntegerField(
+        null= True,
+        blank= True,
+        editable= False,
+        verbose_name= _("Order Count"),
     )
 
     @property
-    def image(self):
+    def primary_image(self):
         return self.Images[0]
     
     @property
-    def is_Popular(self) -> bool:
-        return False
+    def is_Popular(self) -> int:
+        return self.Restaurant_Meals_Sizes
 
     @property
     def slug(self) -> str:
@@ -238,10 +249,6 @@ class RestaurantMeal(BaseModel):
     
     class Meta:
         ordering = ["last_updated"]
-        unique_together = (
-            "restaurant",
-            "meal",
-        )
         verbose_name= _("Restaurant Meal")
         verbose_name_plural= _("Restaurants Meals")
 
@@ -274,10 +281,6 @@ class RestaurantMealSize(BaseModel):
         related_name= _("Meals+"),
         verbose_name= _("Currency"),
     )
-    
-    # @property
-    # def is_popular(self) -> bool:
-    #     return False
     
     @property
     def slug(self) -> str:

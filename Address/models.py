@@ -188,6 +188,7 @@ class Address(BaseModelNative):
     )
 
     class Meta:
+        ordering = ('-last_updated',)
         verbose_name= _("Address")
         verbose_name_plural= _("Address")
 

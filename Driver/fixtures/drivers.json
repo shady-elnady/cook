@@ -1,0 +1,11 @@
+[
+  {
+    "model": "Driver.Driver",
+    "pk": 1,
+    "fields": {
+      "name": "Philippe Troussier",
+      "image": "images/Driver/1.png",
+      "phone_number": "0145425765"
+    }
+  }
+]

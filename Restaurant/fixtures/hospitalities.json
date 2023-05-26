@@ -1,0 +1,23 @@
+[
+  {
+    "model": "Restaurant.Hospitality",
+    "pk": 1,
+    "fields": {
+      "name": "Cake"
+    }    
+  },
+  {
+    "model": "Restaurant.Hospitality",
+    "pk": 2,
+    "fields": {
+      "name": "Tea"
+    }    
+  },
+  {
+    "model": "Restaurant.Hospitality",
+    "pk": 3,
+    "fields": {
+      "name": "Coffee"
+    }    
+  }
+] 

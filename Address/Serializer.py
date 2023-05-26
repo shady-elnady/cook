@@ -1,9 +1,6 @@
 from rest_framework.serializers import  HyperlinkedModelSerializer
 from Language.Serializer import LanguageSerializer
-from Location.Serializer import LocationSerializer
 from Payment.Serializer import CurrencySerializer
-
-from Restaurant.Serializer import RestaurantSerializer
 
 from .models import  Address, Street, Area, City, Governorate, Country
 
@@ -94,7 +91,7 @@ class AreaSerializer(HyperlinkedModelSerializer):
 
 
 class StreetSerializer(HyperlinkedModelSerializer):
-    area = RestaurantSerializer(many= False)
+    area = AreaSerializer(many= False)
 
     class Meta:
         model = Street

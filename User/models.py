@@ -19,7 +19,6 @@ from django.db.models import (
 import uuid
 
 
-from Location.models import Location
 from Restaurant.models import Restaurant
 from Utils.models import BaseModel, BaseModelImage
 from Language.models import Language
@@ -103,6 +102,20 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=False,
         verbose_name= _("is Super User"),
     )
+    created_date= DateTimeField(
+        auto_now_add=True,
+        editable=False,
+        blank=True,
+        null=True,
+        verbose_name= _("Created Date"),
+    )
+    last_updated= DateTimeField(
+        auto_now=True,
+        editable=False,
+        blank=True,
+        null=True,
+        verbose_name= _("Last Update"),
+    )
     
     @property
     def slug(self):
@@ -132,7 +145,7 @@ class Profile(BaseModel, BaseModelImage):
         settings.AUTH_USER_MODEL,
         # primary_key= True,
         on_delete=CASCADE,
-        related_name= "profile",
+        related_name= "Profile",
         verbose_name= _("User"),
     )
     first_name = CharField(
@@ -165,14 +178,6 @@ class Profile(BaseModel, BaseModelImage):
         null=True,
         blank=True,
         verbose_name= _("Language"),
-    )
-    location = ForeignKey(
-        Location,
-        null= True,
-        blank= True,
-        on_delete= CASCADE,
-        related_name= "+",
-        verbose_name= _("Location"),
     )
     address = ForeignKey(
         Address,

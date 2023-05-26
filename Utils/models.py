@@ -16,7 +16,7 @@ from os.path import join
 
 def upload_to(instance, filename):
     extention= filename.split(".")[-1]
-    imgName= getattr(instance, 'name', f'{instance.pk}')
+    imgName= getattr(instance, f'{instance.id}', f'{instance.pk}')
     newName= f"{imgName}.{extention}"    
     return join(f"images/{instance.__class__.__name__}/", newName)
 
@@ -46,7 +46,7 @@ class BaseModel(Model):
         return slugify(f"{self.id}")
 
     class Meta:
-        ordering = ["last_updated"]
+        ordering = ('-last_updated',)
         abstract= True
 
 
