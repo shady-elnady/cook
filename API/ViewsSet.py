@@ -1,5 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated, IsAdminUser 
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser 
 from rest_framework.views import APIView
 
 from rest_framework.response import Response
@@ -22,6 +22,7 @@ User = get_user_model()
 class RegisterViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
+    permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

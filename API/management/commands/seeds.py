@@ -16,7 +16,7 @@ class Command(BaseCommand):
             "makemigrations",
             "migrate",
             "createsuperuser",
-            "collectstatic --noinput",
+            "collectstatic",
         ]
         for work in works:
             try:
@@ -43,9 +43,9 @@ class Command(BaseCommand):
             "hospitalities.json",
             "colors.json",
             "gradients.json",
-            "restaurants.json",
-            "logos.json",
             "color_steps.json",
+            "logos.json",
+            "restaurants.json",
             "restaurant_meals.json",
             "restaurant_meal_images.json",
             "restaurant_meal_sizes.json",
@@ -58,7 +58,7 @@ class Command(BaseCommand):
                 )
             except Exception as e:
                 self.stdout.write(
-                    self.style.ERROR(f"{data} Load Data Failed , \n \t \t Error is: {e}")
+                    self.style.ERROR(f"Load Data Failed from {data} , \n \t Error is: \t \t{e}")
                 )
         
         self.stdout.write(

@@ -11,11 +11,10 @@ from rest_framework.response import Response
 from rest_framework import status, filters
 from django.core.exceptions import ObjectDoesNotExist
 
-from .models import User, Profile, UserRestaurant
+from .models import User, Profile
 from .Serializer import (
     UserSerializer,
     ProfileSerializer,
-    UserRestaurantSerializer,
 )
 # import pyotp
 
@@ -58,23 +57,4 @@ class MyProfileViewSet(ModelViewSet):
     def get_queryset(self):
         return Profile.objects.all().filter(user=self.request.user)
 
-
-class UserRestaurantViewSet(ModelViewSet):
-    queryset = UserRestaurant.objects.all()
-    serializer_class = UserRestaurantSerializer
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
-    filter_backends = (
-        filters.OrderingFilter, # http://example.com/api/users?ordering=account,username
-        filters.SearchFilter,  # http://example.com/api/users?search=russell
-        django_filters.rest_framework.DjangoFilterBackend
-    )
-    ordering_fields = ('id', 'created_date', 'last_updated', 'likes', 'review')
-    filterset_fields = ['created_date', 'last_updated']
-    search_fields = ['user__id', 'restaurant__name', 'is_favorite', 'is_favorite', 'likes']
-    # This will be used as the default ordering
-    ordering = ('-last_updated')
-
-    def get_queryset(self):
-        return UserRestaurant.objects.all().filter(user=self.request.user)
 

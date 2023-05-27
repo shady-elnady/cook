@@ -3,35 +3,40 @@
     "model": "Restaurant.Logo",
     "pk": 1,
     "fields": {
-      "image": "images/Logo/1.png"
+      "image": "images/Logo/1.png",
+      "restaurant": 1
     }    
   },
   {
     "model": "Restaurant.Logo",
     "pk": 2,
     "fields": {
-      "image": "images/Logo/2.png"
+      "image": "images/Logo/2.png",
+      "restaurant": 2
     }    
   },
   {
     "model": "Restaurant.Logo",
-    "pk": 3,
+    "pk": 2,
     "fields": {
-      "image": "images/Logo/3.png"
+      "image": "images/Logo/2.png",
+      "restaurant": 3
     }    
   },
   {
     "model": "Restaurant.Logo",
     "pk": 4,
     "fields": {
-      "image": "images/Logo/4.png"
+      "image": "images/Logo/4.png",
+      "restaurant": 4
     }    
   },
   {
     "model": "Restaurant.Logo",
     "pk": 5,
     "fields": {
-      "image": "images/Logo/5.png"
+      "image": "images/Logo/5.png",
+      "restaurant": 5
     }    
   },
   {
@@ -39,7 +44,8 @@
     "pk": 6,
     "fields": {
       "gradient": 1,
-      "image": "images/Logo/6.png"
+      "image": "images/Logo/6.png",
+      "restaurant": 6
     }    
   },
   {
@@ -47,7 +53,8 @@
     "pk": 7,
     "fields": {
       "gradient": 1,
-      "image": "images/Logo/7.png"
+      "image": "images/Logo/7.png",
+      "restaurant": 7
     }    
   },
   {
@@ -55,7 +62,8 @@
     "pk": 8,
     "fields": {
       "gradient": 2,
-      "image": "images/Logo/8.png"
+      "image": "images/Logo/8.png",
+      "restaurant": 8
     }    
   },
   {
@@ -63,7 +71,8 @@
     "pk": 9,
     "fields": {
       "gradient": 3,
-      "image": "images/Logo/9.png"
+      "image": "images/Logo/9.png",
+      "restaurant": 9
     }    
   },
   {
@@ -71,7 +80,8 @@
     "pk": 10,
     "fields": {
       "gradient": 4,
-      "image": "images/Logo/10.png"
+      "image": "images/Logo/10.png",
+      "restaurant": 10
     }    
   },
   {
@@ -79,7 +89,8 @@
     "pk": 11,
     "fields": {
       "gradient": 5,
-      "image": "images/Logo/11.png"
+      "image": "images/Logo/11.png",
+      "restaurant": 11
     }    
   }  
 ] 

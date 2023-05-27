@@ -1,6 +1,6 @@
 from rest_framework.serializers import HyperlinkedModelSerializer
 
-from .models import Color, ColorStep, Gradient, Hospitality, Logo, Restaurant, RestaurantMeal, RestaurantMealSize, RestaurantMealImage
+from .models import Color, ColorStep, Gradient, Hospitality, Logo, Restaurant, RestaurantMeal, RestaurantMealSize, RestaurantMealImage, UserRestaurant
 from Address.Serializer import AddressSerializer
 from Meal.Serializer import MealSerializer
 from Category.Serializer import CategorySerializer
@@ -26,13 +26,14 @@ class ColorStepSerializer(HyperlinkedModelSerializer):
         model = ColorStep
         fields = [
             "url",
+            "id",
             "color",
             "step",
         ]
 
 
 class GradientSerializer(HyperlinkedModelSerializer):
-    Colors_steps = ColorStepSerializer(many= True)
+    Colors_Steps = ColorStepSerializer(many= True)
 
     class Meta:
         model = Gradient
@@ -41,20 +42,19 @@ class GradientSerializer(HyperlinkedModelSerializer):
             "gradient_type",
             "begin",
             "end",
-            "colors_steps",
-            "image",
+            "Colors_Steps",
         ]
 
 
 class LogoSerializer(HyperlinkedModelSerializer):
-    color = ColorSerializer(many= False)
     gradient = GradientSerializer(many= False)
 
     class Meta:
         model = Logo
         fields = [
             "url",
-            "restaurant",
+            "id",
+            "Restaurant",
             "gradient",
             "image",
         ]
@@ -66,14 +66,13 @@ class RestaurantMealImageSerializer(HyperlinkedModelSerializer):
         model = RestaurantMealImage
         fields = [
             "url",
-            "Restaurant_Meal",
+            "restaurant_meal",
             "image",
             "slug",
         ]
 
 
 class HospitalitySerializer(HyperlinkedModelSerializer):
-    currency = CurrencySerializer(many= False)
     
     class Meta:
         model = Hospitality
@@ -107,7 +106,7 @@ class RestaurantMealSizeSerializer(HyperlinkedModelSerializer):
 class RestaurantMealSerializer(HyperlinkedModelSerializer):
     meal = MealSerializer(many= False)
     Restaurant_Meals_Sizes = RestaurantMealSizeSerializer(many= True)
-    images = RestaurantMealImageSerializer(many= True)
+    Images = RestaurantMealImageSerializer(many= True)
     
     class Meta:
         model = RestaurantMeal
@@ -117,10 +116,10 @@ class RestaurantMealSerializer(HyperlinkedModelSerializer):
             "name",
             "restaurant",
             "meal",
-            "Restaurant_Meals_Sizes",
             "orders_count",
-            "primary_image",
-            "images",
+            "Restaurant_Meals_Sizes",
+            # "primary_image",
+            "Images",
             "created_date",
             "last_updated",
             "slug",
@@ -128,10 +127,11 @@ class RestaurantMealSerializer(HyperlinkedModelSerializer):
 
 
 class RestaurantSerializer(HyperlinkedModelSerializer):
-    Restaurant_Meals = MealSerializer(many=True)
-    Categories = CategorySerializer(many= True)
+    Restaurant_Meals = RestaurantMealSerializer(many=True)
+    categories = CategorySerializer(many= True)
     address = AddressSerializer(many= False)
-    Logo= LogoSerializer(many= False)
+    logo= LogoSerializer(many= False)
+    hospitalities= HospitalitySerializer(many= True)
 
     class Meta:
         model = Restaurant
@@ -140,21 +140,39 @@ class RestaurantSerializer(HyperlinkedModelSerializer):
             "id",
             "name",
             "free_shipping",
-            "Restaurant_Meals",
             "type",
             "open_time",
             "close_time",
-            "lat",
-            "lang",
-            "reviews",
-            "Categories",
-            "Logo",
             "address",
-            "Reviews",
-            "Likes",
-            "is_Opened",
+            "hospitalities",
+            "categories",
+            # "is_Opened",
+            # "users_choiced_count", ##
+            # "Likes",
+            # "Reviews",
+            "logo",
+            "Restaurant_Meals",
             "created_date",
             "last_updated",
-            "users_choiced_count", ##
             "slug",
         ]
+
+
+
+class UserRestaurantSerializer(HyperlinkedModelSerializer):
+    restaurant = RestaurantSerializer(many= False)
+
+    class Meta:
+        model = UserRestaurant
+        fields = [
+            "url",
+            "id",
+            "user",
+            "restaurant",
+            "is_favorite",
+            "comment",
+            "review",
+            "likes",
+            "slug",
+        ]
+ 

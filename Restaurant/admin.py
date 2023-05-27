@@ -40,17 +40,17 @@ admin.site.register(Gradient, GradientInline)
 ####
 
 
-class LogoInline(admin.TabularInline):
-    model = Logo
+# class LogoInline(admin.TabularInline):
+#     model = Logo
 
 
-class RestaurantInline(admin.ModelAdmin):
-    inlines = [ 
-                LogoInline,
-              ]
+# class RestaurantInline(admin.ModelAdmin):
+#     inlines = [ 
+#                 LogoInline,
+#               ]
 
 
-admin.site.register(Restaurant, RestaurantInline)
+# admin.site.register(Restaurant, RestaurantInline)
 
 ####
 

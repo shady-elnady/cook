@@ -6,7 +6,9 @@
       "name": "Burger King",
       "free_shipping": 5.5,
       "type": "F",
-      "hospitalities": [1, 2, 3]
+      "logo": 1,
+      "hospitalities": [1, 2, 3],
+      "categories": [1, 2, 3]
     }    
   },
   {
@@ -16,7 +18,9 @@
       "name": "KFC",
       "free_shipping": 5.5,
       "type": "F",
-      "hospitalities": [1, 2, 3]
+      "logo": 2,
+      "hospitalities": [1, 2, 3],
+      "categories": [1, 2, 3]
     }    
   },
   {
@@ -26,7 +30,9 @@
       "name": "Burger King",
       "free_shipping": 5.5,
       "type": "F",
-      "hospitalities": [1, 2, 3]
+      "logo": 3,
+      "hospitalities": [1, 2, 3],
+      "categories": [1, 2, 3]
     }    
   },
   {
@@ -36,7 +42,9 @@
       "name": "Taco Bell",
       "free_shipping": 5.5,
       "type": "C",
-      "hospitalities": [1, 2, 3]
+      "logo": 4,
+      "hospitalities": [1, 2, 3],
+      "categories": [1, 2, 3]
     }
   },
   {
@@ -46,7 +54,9 @@
       "name": "Subway",
       "free_shipping": 5.5,
       "type": "F",
-      "hospitalities": [1, 2, 3]
+      "logo": 5,
+      "hospitalities": [1, 2, 3],
+      "categories": [1, 2, 3]
     }    
   },
   {
@@ -56,7 +66,9 @@
       "name": "McDonald’s",
       "free_shipping": 5.5,
       "type": "F",
-      "hospitalities": [1, 2, 3]
+      "logo": 6,
+      "hospitalities": [1, 2, 3],
+      "categories": [1, 2, 3]
     }
   },
   {
@@ -66,7 +78,9 @@
       "name": "Burger King",
       "free_shipping": 5.5,
       "type": "F",
-      "hospitalities": [1, 2, 3]
+      "logo": 7,
+      "hospitalities": [1, 2, 3],
+      "categories": [1, 2, 3]
     }
   },
   {
@@ -76,7 +90,9 @@
       "name": "Subway",
       "free_shipping": 5.5,
       "type": "F",
-      "hospitalities": [1, 2, 3]
+      "logo": 8,
+      "hospitalities": [1, 2, 3],
+      "categories": [1, 2, 3]
     }
   },
   {
@@ -86,7 +102,9 @@
       "name": "Burger King",
       "free_shipping": 5.5,
       "type": "F",
-      "hospitalities": [1, 2, 3]
+      "logo": 9,
+      "hospitalities": [1, 2, 3],
+      "categories": [1, 2, 3]
     }
   },
   {
@@ -96,7 +114,9 @@
       "name": "Subway",
       "free_shipping": 5.5,
       "type": "F",
-      "hospitalities": [1, 2, 3]
+      "logo": 10,
+      "hospitalities": [1, 2, 3],
+      "categories": [1, 2, 3]
     }
   },
   {
@@ -106,7 +126,9 @@
       "name": "Starbucks",
       "free_shipping": 5.5,
       "type": "C",
-      "hospitalities": [1, 2, 3]
+      "logo": 11,
+      "hospitalities": [1, 2, 3],
+      "categories": [1, 2, 3]
     }
   }
 ] 

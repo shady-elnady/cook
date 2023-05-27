@@ -6,37 +6,14 @@ from rest_framework.serializers import (
     ValidationError,
  )
 from rest_framework.serializers import  HyperlinkedModelSerializer
+
+from .models import User, Profile
 from Address.Serializer import AddressSerializer
-
-from Restaurant.Serializer import RestaurantSerializer
-
-from .models import User, Profile, UserRestaurant
 from Language.Serializer import LanguageSerializer
-
-
-
-
-class UserRestaurantSerializer(HyperlinkedModelSerializer):
-    restaurant = RestaurantSerializer(many= False)
-
-    class Meta:
-        model = UserRestaurant
-        fields = [
-            "url",
-            "id",
-            "user",
-            "restaurant",
-            "is_favorite",
-            "comment",
-            "review",
-            "likes",
-            "slug",
-        ]
- 
 
   
 class UserSerializer(HyperlinkedModelSerializer):
-    User_Restaurants = UserRestaurantSerializer(many= True)
+    # User_Restaurants = UserRestaurantSerializer(many= True)
 
     class Meta:
         model = User

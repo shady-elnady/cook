@@ -35,8 +35,6 @@ class AddressViewSet(ModelViewSet):
     # This will be used as the default ordering
     ordering = ('-last_updated')
 
-    def get_queryset(self):
-        return Address.objects.all().filter(user=self.request.user)
 
 """
     ?page=1&size=15&sorters[0]
@@ -51,9 +49,7 @@ class StreetViewSet(ModelViewSet):
     filter_backends = (
         filters.OrderingFilter,
     )
-    
-    def get_queryset(self):
-        return Street.objects.all().filter(user=self.request.user)
+
 
 
 class AreaViewSet(ModelViewSet):
@@ -68,9 +64,6 @@ class AreaViewSet(ModelViewSet):
     # This will be used as the default ordering
     ordering = ('last_updated')
 
-    def get_queryset(self):
-        return Area.objects.all().filter(user=self.request.user)
-
 
 class CityViewSet(ModelViewSet):
     queryset = City.objects.all()
@@ -84,10 +77,7 @@ class CityViewSet(ModelViewSet):
     ordering_fields = ('id', 'created_date', 'name')
     # This will be used as the default ordering
     ordering = ('last_updated')
-
-    def get_queryset(self):
-        return City.objects.all().filter(user=self.request.user)
-
+    
 
 class GovernorateViewSet(ModelViewSet):
     queryset = Governorate.objects.all()
@@ -102,8 +92,6 @@ class GovernorateViewSet(ModelViewSet):
     # This will be used as the default ordering
     ordering = ('last_updated')
 
-    def get_queryset(self):
-        return Governorate.objects.all().filter(user=self.request.user)
 
 
 class CountryViewSet(ModelViewSet):
@@ -111,14 +99,11 @@ class CountryViewSet(ModelViewSet):
     serializer_class = CountrySerializer
     permission_classes = [IsAuthenticated]
     filter_backends = (
-        filters.OrderingFilter,
-        # DjangoFilterBackend,
+        filters.OrderingFilter, # http://example.com/api/users?ordering=account,username
+        filters.SearchFilter,  # http://example.com/api/users?search=russell
+        django_filters.rest_framework.DjangoFilterBackend
     )
-     # Explicitly specify which fields the API may be ordered against
-    ordering_fields = ('id', 'created_date', 'name')
+    ordering_fields = ('id', 'created_date', 'last_updated')
+    filterset_fields = ['id', 'created_date', 'last_updated']
+    search_fields = ['restaurant_Meal__name', ]
     # This will be used as the default ordering
-    ordering = ('last_updated')
-
-    def get_queryset(self):
-        return Country.objects.all().filter(user=self.request.user)
-

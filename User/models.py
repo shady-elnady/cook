@@ -18,8 +18,6 @@ from django.db.models import (
 )
 import uuid
 
-
-from Restaurant.models import Restaurant
 from Utils.models import BaseModel, BaseModelImage
 from Language.models import Language
 from Address.models import Address
@@ -243,43 +241,3 @@ class Profile(BaseModel, BaseModelImage):
         verbose_name = _("Profile")
         verbose_name_plural = _("Profiles")
 
-
-class UserRestaurant(BaseModel):
-    user = ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=CASCADE,
-        related_name= "User_Restaurants",
-        verbose_name= _("User"),
-    )
-    restaurant = ForeignKey(
-        Restaurant,
-        on_delete=CASCADE,
-        related_name= "Choiced_Users",
-        verbose_name= _("Restaurant"),
-    )
-    is_favorite = BooleanField(
-        default= False,
-        verbose_name= _("is Favorite"),
-    )
-    comment = TextField(
-        verbose_name= _("Comment"),
-    )
-    review = FloatField(
-        verbose_name= _("Review"),
-    )
-    likes = SmallIntegerField(
-        default= 0,
-        verbose_name= _("Likes"),
-    )
-
-    @property
-    def slug(self):
-        return slugify(str(self.pk))
-
-    class Meta:
-        unique_together = (
-            "user",
-            "restaurant",
-        )
-        verbose_name = _("User Restaurant")
-        verbose_name_plural = _("Users Restaurants")

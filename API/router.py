@@ -16,8 +16,9 @@ from Restaurant.ViewsSet import (
     RestaurantMealViewSet,
     RestaurantMealSizeViewSet,
     RestaurantMealImageViewSet,
+    UserRestaurantViewSet,
 )
-from User.ViewsSet import  MyProfileViewSet, UserRestaurantViewSet, UserViewSet
+from User.ViewsSet import  MyProfileViewSet, UserViewSet
 from Meal.ViewsSet import MealViewSet
 
 from .ViewsSet import  RegisterViewSet
@@ -26,13 +27,13 @@ router = routers.DefaultRouter()
 
 ## User App
 
-router.register('auth/register', RegisterViewSet, basename='task')
+router.register('register', RegisterViewSet, basename='register')
 router.register('users', UserViewSet)
 router.register('MyProfile', MyProfileViewSet)
-router.register('user_restaurants', UserRestaurantViewSet)
 
 ## Restaurant App
 router.register('restaurants', RestaurantViewSet)
+router.register('user_restaurants', UserRestaurantViewSet)
 router.register('restaurants_meals', RestaurantMealViewSet)
 router.register('restaurants_meals_sizes', RestaurantMealSizeViewSet)
 router.register('restaurants_meals_images', RestaurantMealImageViewSet)

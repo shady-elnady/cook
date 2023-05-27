@@ -271,8 +271,7 @@ class VerifymobileOTPView(APIView):
 @permission_classes([IsAuthenticated])
 class LogoutView(APIView):
     authentication_classes = [TokenAuthentication]
-
-    # permission_classes = (IsAuthenticated)
+    permission_classes = (IsAuthenticated)
 
     def post(self, request, format=None):
         try:

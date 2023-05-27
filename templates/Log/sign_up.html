@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Sign Up</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css' %}">
-<link rel="stylesheet" href="{% static 'Log/log_out.css' %}">
+<link rel="stylesheet" href="{% static 'Log/log_up.css' %}">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js' %}"></script>
 
 </head>
@@ -16,16 +16,14 @@
 </div> 
 <section class="stark-login">
   
-  <form method="post" action="{% url 'User:Register' %}" autocomplete="off">
+  <form method="post" action="{% url 'User:Register' %}" autocomplete="off" id="form-id">
     {% csrf_token %}	
     <div id="fade-box">
       <input type="text" name="{{form.username.name}}"  id="username" placeholder="Your User Name" autocomplete="off" required>
       <input type="email" name="{{form.email.name}}"  id="email" placeholder="Your E-Mail" autocomplete="off" required>
       <input type="password" name="{{form.password1.name}}" placeholder="Password" autocomplete="off" required> 
-      <input type="password" name="{{form.password2.name}}" placeholder="Conform Password" autocomplete="off" required> 
           
-      {% comment %} <button>Log In</button>  {% endcomment %}
-      <input type="submit" id="submit" value="Sign Up">
+      <input type="submit" id="submit" value="Sign Up" style="margin-top: 20px;">
       <input type="hidden" name="next" value="{{ next }}" />
     </div>
       </form>
@@ -113,7 +111,13 @@
             </ul>
             
   <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-  <script  src="{% static 'Log/log_out.js' %}"></script>
+  <script  src="{% static 'Log/log_up.js' %}"></script>
+  <script>
+    window.addEventListener('load', function(){
+      document.getElementById("form-id").value="";
+    })
+    
+  </script>
 
 </body>
 </html>
