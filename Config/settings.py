@@ -69,7 +69,6 @@ MY_APP= [
     "Driver",
     "Order",
     "Notification",
-    "Chat",
     "API",
 ]
 
