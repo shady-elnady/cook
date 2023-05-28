@@ -17,7 +17,7 @@ class Command(BaseCommand):
         works = [
             "makemigrations",
             "migrate",
-            # "createsuperuser",
+            "createsuperuser",
             "collectstatic",
         ]
         for work in works:
@@ -41,7 +41,6 @@ class Command(BaseCommand):
             "categories.json",
             "meals.json",
             "drivers.json",
-            "users.json",
             "hospitalities.json",
             "colors.json",
             "gradients.json",
@@ -74,24 +73,7 @@ class Command(BaseCommand):
             email= "m@gmail.com",
             password= "12345",
         )
-        ##
-        for index, profile in enumerate(Profile.objects.all().order_by("created_at")):
-            try:
-                profile.image = f"images/Profile/{index}.png"
-                profile.save()
-                UserRestaurant(
-                    user = profile.user,
-                    restaurant = 1,
-                    is_favorite = True,
-                    comment = "Food, as always, is good both upstairs and downstairs is always clean (download the bk app for deals etc.) sit upstairs every time, more relaxed feel.",
-                    review = 4.5,
-                    likes = 4,
-                ).save()
-            except Exception as e:
-                self.stdout.write(
-                    self.style.ERROR(f"Error in Profile > {e}")
-                )
-        
+       
         self.stdout.write(
             self.style.SUCCESS("Successfully created initial models")
         )
