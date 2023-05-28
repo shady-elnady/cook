@@ -11,22 +11,26 @@ class TwilioMessageHandler:
     def send_otp_via_message(self):     
         try:
             client= Client(settings.ACCOUNT_SID,settings.AUTH_TOKEN)
-            return client.messages.create(
+            meassage = client.messages.create(
                 body=f'your otp is:{self.otp}',
                 from_=settings.TWILIO_PHONE_NUMBER,
                 to=f'{settings.COUNTRY_CODE}{self.mobile}',
-            ).sid
+            )
+            print(meassage.sid)
+            return meassage.sid
         except Exception as e :
             print(f"send_otp_via_message Error: {e}") 
         
     def send_otp_via_whatsapp(self):     
         try:
             client= Client(settings.ACCOUNT_SID,settings.AUTH_TOKEN)
-            return client.messages.create(
+            meassage = client.messages.create(
                 body=f'your otp is:{self.otp}',
                 from_=f'{settings.TWILIO_WHATSAPP_NUMBER}',
                 to=f'whatsapp:{settings.COUNTRY_CODE}{self.mobile}',
-            ).sid
+            )
+            print(meassage.sid)
+            return meassage.sid
         except Exception as e:
             print(f"send_otp_via_whatsapp Error:{e}")
 
@@ -41,3 +45,4 @@ class TwilioMessageHandler:
 # )
 
 # print(message.sid)
+

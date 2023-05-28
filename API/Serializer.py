@@ -61,17 +61,17 @@ class RegisterSerializer(ModelSerializer):
 
 
 
-class UserLoginSerializer(serializers.Serializer):
+class LoginSerializer(serializers.Serializer):
 
-    username_or_email = serializers.CharField(max_length=255, required=True, source='username')
+    username_or_email = serializers.CharField(max_length=255, required=True)
     password = serializers.CharField(max_length=128, write_only=True, required=True,)
 
-    def validate(self, data):
-        # username = data['username']
-        return data
+    # def validate(self, data):
+    #     # username = data['username']
+    #     return data
     
-    class Meta:
-        model = User
-        fields = ['username', 'email']
+    # class Meta:
+    #     model = User
+    #     fields = ['username', 'email']
 
         

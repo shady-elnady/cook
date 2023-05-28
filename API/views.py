@@ -15,21 +15,21 @@ from rest_framework.decorators import api_view, permission_classes
 from social_django.utils import psa
 from requests.exceptions import HTTPError
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth import get_user_model
 
 from API.TwilioMessageHandler import TwilioMessageHandler
 from API.Utils import otp_generator
 from API.ViewsSet import send_otp
 from User.check_email import check_is_email
-from .Serializer import UserLoginSerializer
-from User.models import  User
+from .Serializer import LoginSerializer
 
 # # Create your views here.
 
+User = User = get_user_model()
 
 class UserLoginView(RetrieveAPIView):
-
     permission_classes = (AllowAny,)
-    serializer_class = UserLoginSerializer
+    serializer_class = LoginSerializer
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
@@ -38,16 +38,11 @@ class UserLoginView(RetrieveAPIView):
         username_or_email = str(request.data["username_or_email"])
         password = str(request.data["password"])
         try:
-            kwargs = {}
-            if check_is_email(username_or_email) :
-                kwargs['email'] = username_or_email
-            else:
-                kwargs['username'] = username_or_email
-            kwargs["password"] =password
-            print(kwargs)
-            user = authenticate(**kwargs)
-            print(user)
-            if user is None :
+            user = User.objects.filter(username=username_or_email).first()
+            if user is None:
+                user = User.objects.filter(email=username_or_email).first()
+
+            if user is None or not user.check_password(password):
                 return Response(
                     {
                         'success': False,
@@ -57,7 +52,7 @@ class UserLoginView(RetrieveAPIView):
                     status= status.HTTP_400_BAD_REQUEST,
                 )
             else:
-                login(request, user=user)
+                # login(request, user=user)
                 # token, _ = Token.objects.get_or_create(user=user)
                 # token = Token.objects.get_or_create(user=user)[0].key
                 return Response(
@@ -84,8 +79,6 @@ class UserLoginView(RetrieveAPIView):
                 },
                 status= status.HTTP_400_BAD_REQUEST,
             )
-
-
 
 
 @api_view(['POST'])
@@ -136,40 +129,40 @@ class MobileSendOTP(APIView):
             methodOtp = str(request.data.get('methodOtp'))
             if mobile_number and user_id:
                 mobile = str(mobile_number)
-                # user = User.objects.get(id__iexact=user_id)
                 user = User.objects.get(id__iexact=user_id)
-                otp_key = otp_generator()
+                # otp_key = otp_generator()
+                otp_key = "12345"
                 if user is not None:
                     messagehandler = None               
                     if methodOtp=="methodOtpWhatsapp":
                         messagehandler=TwilioMessageHandler(mobile,otp_key).send_otp_via_whatsapp()
                     else:
                         messagehandler=TwilioMessageHandler(mobile,otp_key).send_otp_via_message()
-                    if messagehandler is None:
-                        return Response(
-                            {
-                                'success': False,
-                                'message': 'Error Connection To Server',
-                                'status': status.HTTP_404_NOT_FOUND,
+                    # if messagehandler is None:
+                    #     return Response(
+                    #         {
+                    #             'success': False,
+                    #             'message': 'Error Connection To Server',
+                    #             'status': status.HTTP_404_NOT_FOUND,
+                    #         },
+                    #         status= status.HTTP_400_BAD_REQUEST,
+                    #     )
+                    # else:
+                    user.otp = otp_key
+                    user.mobile = mobile
+                    user.save()
+                    return Response(
+                        {
+                            'success': True,
+                            'message': 'Succes send OTP Go To Your Mobile',
+                            'status': status.HTTP_202_ACCEPTED,
+                            'data': {
+                                "user_id":user.id,
+                                "is_verified": user.is_verified,
                             },
-                            status= status.HTTP_400_BAD_REQUEST,
-                        )
-                    else:
-                        user.otp = otp_key
-                        user.mobile = mobile
-                        user.save()
-                        return Response(
-                            {
-                                'success': True,
-                                'message': 'Succes send OTP Go To Your Mobile',
-                                'status': status.HTTP_202_ACCEPTED,
-                                'data': {
-                                    "user_id":user.id,
-                                    "is_verified": user.is_verified,
-                                },
-                            },
-                            status= status.HTTP_202_ACCEPTED,
-                        )
+                        },
+                        status= status.HTTP_202_ACCEPTED,
+                    )
                 else:
                     return Response(
                         {
@@ -219,7 +212,9 @@ class VerifymobileOTPView(APIView):
                 else:
                     if user.otp == otp:
                         user.is_verified = True
+                        user.is_active = True
                         user.save()
+                        # login(request, user=user)
                         token, _ = Token.objects.get_or_create(user=user)
                         return Response(
                             {

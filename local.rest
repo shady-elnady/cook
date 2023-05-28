@@ -1,0 +1,19 @@
+
+@hostname = 127.0.0.1:8000
+@port = 8000
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+### REGISTER
+# @prompt username = t
+# @prompt email = t@t.com
+# @prompt refCode = register
+# @prompt password 12345
+POST https://{{host}}/api/{{refCode}}/ HTTP/1.1
+content-type: {{contentType}}
+
+{
+    "username": "{{username}}",
+    "email": "{{email}}",
+    "password": "{{password}}"
+}
