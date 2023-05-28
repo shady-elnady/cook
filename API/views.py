@@ -121,7 +121,7 @@ def register_by_access_token(request, backend):
 
 @permission_classes([AllowAny])
 class MobileSendOTP(APIView):
-    
+
     def post(self, request, *agrs, **kwargs):
         try:
             mobile_number = str(request.data.get('mobile'))
@@ -138,31 +138,31 @@ class MobileSendOTP(APIView):
                         messagehandler=TwilioMessageHandler(mobile,otp_key).send_otp_via_whatsapp()
                     else:
                         messagehandler=TwilioMessageHandler(mobile,otp_key).send_otp_via_message()
-                    # if messagehandler is None:
-                    #     return Response(
-                    #         {
-                    #             'success': False,
-                    #             'message': 'Error Connection To Server',
-                    #             'status': status.HTTP_404_NOT_FOUND,
-                    #         },
-                    #         status= status.HTTP_400_BAD_REQUEST,
-                    #     )
-                    # else:
-                    user.otp = otp_key
-                    user.mobile = mobile
-                    user.save()
-                    return Response(
-                        {
-                            'success': True,
-                            'message': 'Succes send OTP Go To Your Mobile',
-                            'status': status.HTTP_202_ACCEPTED,
-                            'data': {
-                                "user_id":user.id,
-                                "is_verified": user.is_verified,
+                    if messagehandler is None:
+                        return Response(
+                            {
+                                'success': False,
+                                'message': 'Error Connection To Server',
+                                'status': status.HTTP_404_NOT_FOUND,
                             },
-                        },
-                        status= status.HTTP_202_ACCEPTED,
-                    )
+                            status= status.HTTP_400_BAD_REQUEST,
+                        )
+                    else:
+                        user.otp = otp_key
+                        user.mobile = mobile
+                        user.save()
+                        return Response(
+                            {
+                                'success': True,
+                                'message': 'Succes send OTP Go To Your Mobile',
+                                'status': status.HTTP_202_ACCEPTED,
+                                'data': {
+                                    "user_id":user.id,
+                                    "is_verified": user.is_verified,
+                                },
+                            },
+                            status= status.HTTP_202_ACCEPTED,
+                        )
                 else:
                     return Response(
                         {
@@ -214,7 +214,7 @@ class VerifymobileOTPView(APIView):
                         user.is_verified = True
                         user.is_active = True
                         user.save()
-                        # login(request, user=user)
+                        login(request, user=user)
                         token, _ = Token.objects.get_or_create(user=user)
                         return Response(
                             {

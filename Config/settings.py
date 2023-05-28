@@ -52,8 +52,7 @@ CORS_ALLOW_CREDENTIALS = True
 THIRD_LIBRARIES= [
     'rest_framework', # Django rest framework (drf)
     'rest_framework.authtoken', # Adding token based authentication from drf
-    'sslserver',
-    'social_django', # Python social auth django app
+    # 'sslserver',
     'django_filters',
     'corsheaders',
 ]
@@ -101,8 +100,6 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
     # for corsheaders
     'corsheaders.middleware.CorsMiddleware',
-    # for social
-    'social_django.middleware.SocialAuthExceptionMiddleware', 
 ]
 
 ROOT_URLCONF = 'Config.urls'
@@ -141,13 +138,6 @@ DATABASES = {
         'NAME':  DATABASE_DIR,
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'DataBase/db.sqlite3',
-#     }
-# }
 
 
 # Password validation
@@ -276,12 +266,6 @@ REST_FRAMEWORK = {
 
 
 ## Twilio
-# ACCOUNT_SID='AC0a90271b39b670a662b4ed8c08d775e9'
-# AUTH_TOKEN='3b6e1f349f81a19e8cfed301b6f828fa'
-# COUNTRY_CODE='+2'
-# TWILIO_WHATSAPP_NUMBER='whatsapp:+14155238886'
-# TWILIO_PHONE_NUMBER='+12525184301'
-# TWILIO_PHONE_NUMBER='+12525184301'
 ACCOUNT_SID='AC581b79873a392165b31f7429d2fcfcfb'
 AUTH_TOKEN='d5c961c16b402d455d56e0930cfe6bfa'
 COUNTRY_CODE='+2'
@@ -307,73 +291,6 @@ DEFAULT_FROM_EMAIL = 'shadyelnady.gmail.com'
 
 
 AUTHENTICATION_BACKENDS = (
-    # 'User.backends.EmailOrUsernameModelBackend',
     'django.contrib.auth.backends.ModelBackend',
-    'social_core.backends.google.GoogleOAuth2',
-    'social_core.backends.google.GooglePlusAuth',
-    'social_core.backends.facebook.FacebookOAuth2',
 )
-
-SOCIAL_AUTH_PIPELINE = (
-    'social_core.pipeline.social_auth.social_details',
-    'social_core.pipeline.social_auth.social_uid',
-    'social_core.pipeline.social_auth.auth_allowed',
-    'social_core.pipeline.social_auth.social_user',
-    'API.save_profile',  # <--- set the path to the function
-    'social_core.pipeline.social_auth.associate_user',
-    'social_core.pipeline.social_auth.load_extra_data',
-    'social_core.pipeline.user.user_details',   
-    'social_core.pipeline.user.get_username',
-    'social_core.pipeline.user.create_user',
-    'social_core.pipeline.social_auth.associate_by_email',
-)
-
-## Google
-# OAuth2
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '651914112561-qc7gkks9ahs8tvukdvu7hnfp8uco9pgb.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
-
-
-# for Sign In
-SOCIAL_AUTH_GOOGLE_PLUS_KEY = '...'
-SOCIAL_AUTH_GOOGLE_PLUS_SECRET = '...'
-
-# Google OAuth2 (google-oauth2)
-SOCIAL_AUTH_GOOGLE_OAUTH2_IGNORE_DEFAULT_SCOPE = True
-SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
-    'https://www.googleapis.com/auth/userinfo.email',
-    'https://www.googleapis.com/auth/userinfo.profile'
-]
-
-# Google+ SignIn (google-plus)
-SOCIAL_AUTH_GOOGLE_PLUS_IGNORE_DEFAULT_SCOPE = True
-SOCIAL_AUTH_GOOGLE_PLUS_SCOPE = [
-    'https://www.googleapis.com/auth/plus.login',
-    'https://www.googleapis.com/auth/userinfo.email',
-    'https://www.googleapis.com/auth/userinfo.profile'
-]
-
-## FaceBook
-# OAuth2
-SOCIAL_AUTH_FACEBOOK_KEY = '198207789800405'
-SOCIAL_AUTH_FACEBOOK_SECRET = '8688356e573c3fa9c76acbb7d81dc62d'
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'profile']
-SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-  'locale': 'ru_RU',
-  'fields': 'id, name, email, age_range'
-}
-
-
-# add this
-SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
-    ('name', 'name'),
-    ('email', 'email'),
-    ('picture', 'picture'),
-    ('link', 'profile_url'),
-]
-
-SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.10'
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_USE_DEPRECATED_API = True
-SOCIAL_AUTH_GOOGLE_PLUS_USE_DEPRECATED_API = True
 

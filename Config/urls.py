@@ -33,7 +33,6 @@ urlpatterns = [
     path('api/',include('API.urls', namespace="API")),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('social-auth/', include('social_django.urls', namespace="social")),
     # Admin
     path('admin/', admin.site.urls),
 ]

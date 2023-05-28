@@ -44,18 +44,3 @@ class RegisterViewSet(ModelViewSet):
                 'This URL To Register '
             )
     
-
-def send_otp(mobile, otp_key):
-    """
-    This is an helper function to send otp to session stored mobiles or 
-    passed mobile number as argument.    """
-    if mobile:
-        mobile = str(mobile)
-        # otp_key = str(otp_generator())
-        link = f'https://2factor.in/API/R1/?module=TRANS_SMS&apikey=7c59cf94-d129-11ec-9c12-0200cd936042&to={mobile}&from=MMBook&templatename=mymedbook&var1={otp_key}&var2={otp_key}'
-        result = requests.get(link, verify=False)
-        print(result)
-        return otp_key
-    else:
-        return False
-
