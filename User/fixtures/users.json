@@ -7,14 +7,7 @@
       "is_active": false,
       "is_verified": false,
       "is_staff": false,
-      "is_superuser": false,
-      "Profile": {
-        "pk": 1,
-        "first_name": "Dora",
-        "family_name": "Perry",
-        "language": 1,
-        "image": "images/Profile/1.png"
-      }
+      "is_superuser": false
     }
   },
   {
@@ -25,14 +18,7 @@
       "is_active": false,
       "is_verified": false,
       "is_staff": false,
-      "is_superuser": false,
-      "Profile": {
-        "pk": 2,
-        "first_name": "Laura",
-        "family_name": "Smith",
-        "language": 1,
-        "image": "images/Profile/1.png"
-      }
+      "is_superuser": false
     }
   },
   {
@@ -43,14 +29,7 @@
       "is_active": false,
       "is_verified": false,
       "is_staff": false,
-      "is_superuser": false,
-      "Profile": {
-        "pk": 3,
-        "first_name": "Victoria",
-        "family_name": "Champain",
-        "language": 1,
-        "image": "images/Profile/1.png"
-      }
+      "is_superuser": false
     }
   },
   {
@@ -61,14 +40,7 @@
       "is_active": false,
       "is_verified": false,
       "is_staff": false,
-      "is_superuser": false,
-      "Profile": {
-        "pk": 4,
-        "first_name": "Eleanor",
-        "family_name": "Summers",
-        "language": 1,
-        "image": "images/Profile/1.png"
-      }
+      "is_superuser": false
     }
   }
 ]
