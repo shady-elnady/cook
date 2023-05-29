@@ -2,7 +2,7 @@ from django.urls import path, include
 from django.contrib.auth.views import LogoutView, LoginView
 
 from .views import (
-  register_request,
+  # register_request,
   # Twilio
   register,
   otpVerify,
@@ -21,7 +21,7 @@ urlpatterns = [
         ),
         name='LogIn',
     ),
-    path("register", register_request, name="Register"),
+    path("register", register, name="Register"),
     path('logout/', LogoutView.as_view(), name='LogOut'),
     # Twilio
     path('twilio_register', register, name='TwilioRegister'),

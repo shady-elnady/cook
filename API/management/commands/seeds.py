@@ -17,7 +17,7 @@ class Command(BaseCommand):
         works = [
             "makemigrations",
             "migrate",
-            "createsuperuser",
+            # "createsuperuser",
             "collectstatic",
         ]
         for work in works:
@@ -50,6 +50,7 @@ class Command(BaseCommand):
             "restaurant_meals.json",
             "restaurant_meal_images.json",
             "restaurant_meal_sizes.json",
+            "users.json",
         ]
         for data in load_data:
             try:
@@ -62,17 +63,7 @@ class Command(BaseCommand):
                     self.style.ERROR(f"Load Data Failed from {data} , \n \t Error is: \t \t{e}")
                 )
         ##
-
-        User.objects.create_superuser(
-            username= "Shady",
-            email= "shadyelnady@gmail.com",
-            password= "12345",
-        )
-        User.objects.create_user(
-            username= "M",
-            email= "m@gmail.com",
-            password= "12345",
-        )
+        call_command("users_seeds")
        
         self.stdout.write(
             self.style.SUCCESS("Successfully created initial models")

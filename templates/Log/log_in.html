@@ -21,7 +21,6 @@
       <label>Password</label>
     </div>   
     
-    <input type="submit" id="submit" value="aaaaa" style="display: none;" />
     <a type="submit" onclick="click_log_in()">
       <span></span>
       <span></span>
@@ -29,6 +28,7 @@
       <span></span>
       Log IN
     </a>    
+    <input type="submit" id="submit" value="" style="opacity: 0;" />
     
     <a href="{% url 'User:Register' %}" class="Sign_up" style="font-size: small;text-transform: lowercase;" >Don’t have account? Sign up</a>
 
@@ -36,7 +36,7 @@
   </form>
 </div>
   <script>
-    //const submit_btn = document.querySelector("#submit");
+    const submit_btn = document.querySelector("#submit");
     const form = document.getElementById("form-id");
     window.addEventListener('load', function(){
       form.value="";
@@ -44,7 +44,7 @@
     })
     function click_log_in() {
       form.submit();
-      //submit_btn.click();
+      submit_btn.click();
       console.log("shady");
     }
 

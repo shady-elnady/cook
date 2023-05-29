@@ -32,18 +32,24 @@ def register(request):
     if request.method=="POST":
         if User.objects.filter(username__iexact=request.POST['user_name']).exists():
             return HttpResponse("User already exists")
-
-        user=User.objects.create(username=request.POST['user_name'])
+        if User.objects.filter(email__iexact=request.POST['email']).exists():
+            return HttpResponse("User already exists")
         otp=random.randint(1000,9999)
-        profile=Profile.objects.create(user=user,phone_number=request.POST['phone_number'],otp=f'{otp}')
+        user=User.objects.create_user(
+            username=request.POST['user_name'],
+            email=request.POST['email'],
+            password=request.POST['password'],
+            otp=f'{otp}'
+        )
+        profile=Profile.objects.create(user=user,phone_number=request.POST['mobile'])
         if request.POST['methodOtp']=="methodOtpWhatsapp":
-            messagehandler=TwilioMessageHandler(request.POST['phone_number'],otp).send_otp_via_whatsapp()
+            messagehandler=TwilioMessageHandler(request.POST['mobile'],otp).send_otp_via_whatsapp()
         else:
-            messagehandler=TwilioMessageHandler(request.POST['phone_number'],otp).send_otp_via_message()
+            messagehandler=TwilioMessageHandler(request.POST['mobile'],otp).send_otp_via_message()
         red=redirect(f'otp/{profile.uid}/')
         red.set_cookie("can_otp_enter",True,max_age=600)
         return red  
-    return render(request, 'Twilio/register.html')
+    return render(request, 'Logg/sign_up.html')
 
 
 def otpVerify(request,uid):
