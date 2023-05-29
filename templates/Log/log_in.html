@@ -26,13 +26,13 @@
       <span></span>
       <span></span>
       <span></span>
-      Log IN
+      {% comment %} Log IN {% endcomment %}
+      <input type="submit" id="submit" value="Log In" style="display: block;left: 0;top: 0;background-color: transparent;border: none;color: inherit;" />
     </a>    
-    <input type="submit" id="submit" value="" style="opacity: 0;" />
     
     <a href="{% url 'User:Register' %}" class="Sign_up" style="font-size: small;text-transform: lowercase;" >Don’t have account? Sign up</a>
 
-    <input type="hidden" name="next" value="{{ next }}" />
+    <input type="hidden" name="next" value="{{ next }}"/>
   </form>
 </div>
   <script>
@@ -47,6 +47,9 @@
       submit_btn.click();
       console.log("shady");
     }
+    submit_btn.addEventListener('click', (){
+      print("Submit Clicked");
+    })
 
     
   </script>

@@ -19,9 +19,18 @@
   <form method="post" action="{% url 'User:Register' %}" autocomplete="off" id="form-id">
     {% csrf_token %}	
     <div id="fade-box">
-      <input type="text" name="{{form.username.name}}"  id="username" placeholder="Your User Name" autocomplete="off" required>
-      <input type="email" name="{{form.email.name}}"  id="email" placeholder="Your E-Mail" autocomplete="off" required>
-      <input type="password" name="{{form.password1.name}}" placeholder="Password" autocomplete="off" required> 
+      <input type="text" name="username"  id="username" placeholder="Your User Name" autocomplete="off" required>
+      <input type="email" name="email"  id="email" placeholder="Your E-Mail" autocomplete="off" required>
+      <input type="text" name="mobile" placeholder="Mobile" autocomplete="off" required> 
+      <input type="password" name="password" placeholder="Password" autocomplete="off" required>
+
+      <div class="radio-box">
+        <label for="methodOtpSms">SMS:</label>
+        <input type="radio" name="methodOtp" id="methodOtpSms" value="methodOtpSms">
+
+        <label for="methodOtpWhatsapp">WhatsApp:</label>
+        <input type="radio" name="methodOtp" id="methodOtpWhatsapp" value="methodOtpWhatsapp">
+      </div>
           
       <input type="submit" id="submit" value="Sign Up" style="margin-top: 20px;">
       <input type="hidden" name="next" value="{{ next }}" />

@@ -64,6 +64,7 @@ class Command(BaseCommand):
                 )
         ##
         call_command("users_seeds")
+        call_command("runserver")
        
         self.stdout.write(
             self.style.SUCCESS("Successfully created initial models")
