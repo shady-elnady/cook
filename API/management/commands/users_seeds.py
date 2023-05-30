@@ -11,7 +11,7 @@ from User.models import Profile, User
 
 
 class Command(BaseCommand):
-    help = "Creates initial models"
+    help = "Creates initial Users models"
 
     def handle(self, *args, **options):   
         #
@@ -49,5 +49,5 @@ class Command(BaseCommand):
                 )
         
         self.stdout.write(
-            self.style.SUCCESS("Successfully created initial models")
+            self.style.SUCCESS("Successfully created initial Users models")
         )
