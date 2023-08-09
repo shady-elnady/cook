@@ -20,5 +20,6 @@ rmdir media/*
 mkdir media
 mkdir media/images/Category
 mkdir media/images/Logo
+mkdir staticfiles
 # python manage.py seeds 
 # python manage.py runserver

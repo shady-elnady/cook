@@ -69,3 +69,12 @@ def otpVerify(request,uid):
 #         return HttpResponse(" verified.")
 #     else:
 #         return HttpResponse(" Not verified.")
+
+
+# verification view
+def verify_email(request, pk):
+    user = User.objects.get(pk=pk)
+    if not user.email_verified:
+        user.email_verified = True
+        user.save()
+    return redirect('http://localhost:8000/')  # Replace with your desired redirect URL

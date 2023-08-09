@@ -4,6 +4,9 @@ import random
 import string
 from django.utils.text import slugify
 from io import BytesIO
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 
 def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
@@ -95,11 +98,6 @@ def password_generator(length):
     return password
 
 
-def otp_generator():
-    otp = random.randint(999, 9999)
-    return otp
-
-
 def unique_hex_generator(phone: str, password: str):
     string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*'
     salt_int = str(random.randint(1, 999999999999))
@@ -108,3 +106,19 @@ def unique_hex_generator(phone: str, password: str):
     byte_like = bytes(
         str(salt_int+salt_str+str(phone)+password).encode('utf-8'))
     return b64encode(byte_like)
+
+
+
+############
+
+def generate_otp(length=4):
+    characters = string.digits
+    otp = ''.join(random.choice(characters) for _ in range(length))
+    return otp
+
+def send_otp_email(email, otp):
+    subject = 'Your OTP'
+    message = f'Your OTP is: {otp}'
+    from_email = settings.EMAIL_HOST_USER
+    recipient_list = [email]
+    send_mail(subject, message, from_email, recipient_list)

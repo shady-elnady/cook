@@ -55,7 +55,10 @@ class RegisterSerializer(ModelSerializer):
             "id": {"read_only": True},
             "username": {"required": True},
             "email": {"required": True},
-            "password": {"required": True},
+            "password": {
+                "required": True,
+                'write_only': True,
+            },
             "mobile": {"required": False},
         }
 
@@ -74,4 +77,11 @@ class LoginSerializer(serializers.Serializer):
     #     model = User
     #     fields = ['username', 'email']
 
-        
+
+class ResetPasswordEmailSerializer(Serializer):
+    email = EmailField(required=True)
+
+
+class ChangePasswordSerializer(Serializer):
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)

@@ -23,6 +23,7 @@ from django.conf import settings
 
 
 from API.router import router
+from User.views import verify_email
 
 
 
@@ -33,8 +34,11 @@ urlpatterns = [
     path('api/',include('API.urls', namespace="API")),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
+    path('verify_email/<int:pk>/', verify_email, name='verify_email'),
     # Admin
     path('admin/', admin.site.urls),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

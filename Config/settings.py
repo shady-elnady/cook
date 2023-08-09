@@ -52,6 +52,7 @@ CORS_ALLOW_CREDENTIALS = True
 THIRD_LIBRARIES= [
     'rest_framework', # Django rest framework (drf)
     'rest_framework.authtoken', # Adding token based authentication from drf
+    'django_rest_passwordreset',
     # 'sslserver',
     'django_filters',
     'corsheaders',
@@ -264,13 +265,28 @@ REST_FRAMEWORK = {
 }
 
 
-## Twilio
-ACCOUNT_SID='AC581b79873a392165b31f7429d2fcfcfb'
-AUTH_TOKEN='d5c961c16b402d455d56e0930cfe6bfa'
-COUNTRY_CODE='+2'
-TWILIO_WHATSAPP_NUMBER='whatsapp:+14155238886'
-TWILIO_PHONE_NUMBER='+12525184301'
-TWILIO_PHONE_NUMBER='+13156673957'
+# ## Twilio
+# ACCOUNT_SID='AC581b79873a392165b31f7429d2fcfcfb'
+# AUTH_TOKEN='d5c961c16b402d455d56e0930cfe6bfa'
+# COUNTRY_CODE='+2'
+# TWILIO_WHATSAPP_NUMBER='whatsapp:+14155238886'
+# TWILIO_PHONE_NUMBER='+12525184301'
+# TWILIO_PHONE_NUMBER='+13156673957'
+
+##
+# ## Twilio
+# ACCOUNT_SID='ACab16021d54dc03acd45e5640f84aaf17'
+# AUTH_TOKEN='0ee3a5fbd375483bd57db53c4f867592'
+# COUNTRY_CODE='+2'
+# TWILIO_WHATSAPP_NUMBER='whatsapp:+14155238886'
+# # TWILIO_PHONE_NUMBER='+12525184301'
+# # TWILIO_PHONE_NUMBER='+13156673957'
+# TWILIO_PHONE_NUMBER='+14155238886'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 
 ##
 LOGIN_URL = reverse_lazy('User:LogIn')
@@ -280,16 +296,25 @@ LOGOUT_URL = reverse_lazy('User:LogOut')
 
 
 ## SMTP Configure
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'shadyelnady.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'shadyelnady.gmail.com'
-EMAIL_HOST_PASSWORD = '12345'
-DEFAULT_FROM_EMAIL = 'shadyelnady.gmail.com'
+# Email Backend Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # Replace with your preferred backend
 
+EMAIL_PORT = 587  # Replace with your email port
+EMAIL_USE_TLS = True  # Set to False if your email server doesn't use TLS
+EMAIL_HOST = 'smtp.gmail.com'  # Replace with your email host for gmail -> 'smtp.gmail.com'
+EMAIL_HOST_USER = 'shadyelnady.gmail.co'  # Replace with your email username
+EMAIL_HOST_PASSWORD = 'whbkjiyrbflyhlnr'  # Replace with your email password
+# DEFAULT_FROM_EMAIL = 'shadyelnady.gmail.com'
+EMAIL_USE_SSL = False
 
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-)
-
+"""
+    from django.conf import settings
+    from django.core.mail import EmailMultiAlternatives
+    emailFrom = [settings.EMAIL_HOST_USER]
+        emailTo ='ponnamnarasimha1@gmail.com'
+        text_content = 'Your content here'
+        email_subject = "Subject here"
+        msg = EmailMultiAlternatives(email_subject, text_content, emailFrom, [emailTo], )
+        msg.send()
+        return HttpResponse('We have sent a email verification please check your email')
+"""

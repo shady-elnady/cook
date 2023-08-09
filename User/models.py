@@ -59,7 +59,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name= _("mobile"),
     )
     otp = CharField(
-        max_length=25,
+        max_length=6,
         blank=True,
         null= True,
         verbose_name= _("OTP"),
@@ -114,6 +114,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         null=True,
         verbose_name= _("Last Update"),
     )
+    email_verified = models.BooleanField(default=False)
     
     @property
     def slug(self):

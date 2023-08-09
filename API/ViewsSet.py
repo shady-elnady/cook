@@ -10,9 +10,10 @@ from django.contrib.auth import login
 from rest_framework import permissions, generics, status, serializers
 import requests
 from rest_framework.authtoken.models import Token
+# from django.views.decorators.csrf import csrf_exempt
 
 from .TwilioMessageHandler import TwilioMessageHandler
-from .Serializer import  RegisterSerializer
+from .Serializer import  ChangePasswordSerializer, RegisterSerializer
 
 User = get_user_model()
 
@@ -24,6 +25,7 @@ class RegisterViewSet(ModelViewSet):
     serializer_class = RegisterSerializer
     permission_classes = [AllowAny]
 
+    # @csrf_exempt
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -43,4 +45,3 @@ class RegisterViewSet(ModelViewSet):
         raise serializers.ValidationError(
                 'This URL To Register '
             )
-    

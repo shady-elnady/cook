@@ -1,4 +1,3 @@
-# Define a function for
 # for validating an Email
 import re
 
