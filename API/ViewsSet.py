@@ -5,7 +5,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model
 
-from .Utils import otp_generator
 from django.contrib.auth import login
 from rest_framework import permissions, generics, status, serializers
 import requests

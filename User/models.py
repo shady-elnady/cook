@@ -114,7 +114,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         null=True,
         verbose_name= _("Last Update"),
     )
-    email_verified = models.BooleanField(default=False)
+    email_verified = models.BooleanField(
+        default=False,
+        verbose_name= _("E-mail Verified"),
+    )
     
     @property
     def slug(self):

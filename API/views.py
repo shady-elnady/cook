@@ -21,7 +21,7 @@ from django.contrib.auth import update_session_auth_hash
 
 from API.TwilioMessageHandler import TwilioMessageHandler
 from User.check_email import check_is_email
-from .Serializer import LoginSerializer, ChangePasswordSerializer, UserSerializer
+from .Serializer import LoginSerializer, ChangePasswordSerializer
 from django.contrib.auth import update_session_auth_hash
 from API.Utils import generate_otp, send_otp_email
 

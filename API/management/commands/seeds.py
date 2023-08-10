@@ -5,9 +5,7 @@ import random
 from django.core.management.base import BaseCommand
 from django.core.management import call_command
 from django.conf import settings
-from Restaurant.models import UserRestaurant
 
-from User.models import Profile, User
 
 
 class Command(BaseCommand):
@@ -17,7 +15,6 @@ class Command(BaseCommand):
         works = [
             "makemigrations",
             "migrate",
-            # "createsuperuser",
             "collectstatic",
         ]
         for work in works:

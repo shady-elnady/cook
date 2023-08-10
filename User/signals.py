@@ -18,5 +18,3 @@ def create_profile_signal(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)        
         Token.objects.create(user=instance)
     instance.Profile.save()
-
-

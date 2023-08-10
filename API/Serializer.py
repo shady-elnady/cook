@@ -15,11 +15,11 @@ from rest_framework import status, generics
 
 import imp
 from rest_framework import serializers
-from django.contrib.auth import get_user_model
 from User.check_email import check_is_email
 # from accounts.models import Role
-from User.models import User
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 
 # User = get_user_model()
 

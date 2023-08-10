@@ -15,22 +15,40 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):   
         #
-        User.objects.create_superuser(
-            username= "Shady",
-            email= "shadyelnady@gmail.com",
-            password= "12345",
-        )
-        User.objects.create_superuser(
-            username= "Mai",
-            email= "m@gmail.com",
-            password= "12345",
-        )
-        User.objects.create_superuser(
-            username= "Khalid",
-            email= "khalid@gmail.com",
-            password= "12345",
-        )
+        User.objects.all().delete()
+        users_data= [        
+            {
+                "username": "Shady",
+                "email": "shadyelnady0@gmail.com",
+                "password": "12345",
+            },
+            {
+                "username": "Mai",
+                "email": "m@gmail.com",
+                "password": "12345",
+            },
+            {
+                "username": "Khalid",
+                "email": "khalid@gmail.com",
+                "password": "12345",
+            },
+        ]
         
+        for user in users_data:
+            try:
+                User.objects.create_superuser(
+                    username= user["username"],
+                    email= user["email"],
+                    password= user["password"],
+                )
+                self.stdout.write(
+                    self.style.SUCCESS(f"Successfully Add User > {user}")
+                )
+            except Exception as e:
+                self.stdout.write(
+                    self.style.ERROR(f"Error in User > {e}")
+                )
+
         for index, profile in enumerate(Profile.objects.all().order_by("created_date")):
             try:
                 profile.image = f"images/Profile/{index+1}.png"

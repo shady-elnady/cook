@@ -5,8 +5,11 @@ from django.db.models.signals import post_save
 from django.urls import reverse
 from django.core.mail import send_mail
 from django_rest_passwordreset.signals import reset_password_token_created
-from User.models import User as CustomUser
 from django.conf import settings
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
 
 @receiver(reset_password_token_created)
 def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
@@ -48,7 +51,7 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
     msg.send()
 
 # Signal for Welcome & Email Verification
-@receiver(post_save, sender=CustomUser)
+@receiver(post_save, sender=User)
 def send_email_verification(sender, instance, created, **kwargs):
     if created and not instance.email_verified:
         verification_link = f"http://localhost:8000/verify_email/{instance.pk}/"
@@ -58,7 +61,7 @@ def send_email_verification(sender, instance, created, **kwargs):
         recipient_list = [instance.email]
         send_mail(subject, message, from_email, recipient_list)
 
-@receiver(post_save, sender=CustomUser)
+@receiver(post_save, sender=User)
 def send_welcome_email(sender, instance, created, **kwargs):
     if created and instance.email_verified:
         subject = 'Welcome to Our Website'
