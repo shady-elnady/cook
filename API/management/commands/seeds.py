@@ -47,7 +47,7 @@ class Command(BaseCommand):
             "restaurant_meals.json",
             "restaurant_meal_images.json",
             "restaurant_meal_sizes.json",
-            "users.json",
+            # "users.json",
         ]
         for data in load_data:
             try:

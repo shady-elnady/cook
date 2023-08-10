@@ -15,28 +15,33 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):   
         #
-        User.objects.all().delete()
-        users_data= [        
+        # User.objects.all().delete()
+        users_data= [
             {
-                "username": "Shady",
-                "email": "shadyelnady0@gmail.com",
+                "username": "Dora Perry",
+                "email": "dora_perry@gmail.com",
                 "password": "12345",
             },
             {
-                "username": "Mai",
-                "email": "m@gmail.com",
+                "username": "Laura Smith",
+                "email": "laura_smith@gmail.com",
                 "password": "12345",
             },
             {
-                "username": "Khalid",
-                "email": "khalid@gmail.com",
+                "username": "Victoria Champain",
+                "email": "victoria_champain@gmail.com",
                 "password": "12345",
             },
+            {
+                "username": "Eleanor Summers",
+                "email": "eleanor_summers@gmail.com",
+                "password": "12345",
+            }
         ]
         
         for user in users_data:
             try:
-                User.objects.create_superuser(
+                User.objects.create_user(
                     username= user["username"],
                     email= user["email"],
                     password= user["password"],
@@ -48,6 +53,43 @@ class Command(BaseCommand):
                 self.stdout.write(
                     self.style.ERROR(f"Error in User > {e}")
                 )
+
+        ####################################
+
+        super_users_data= [        
+            {
+                "username": "Shady",
+                "email": "shadyelnady0@gmail.com",
+                "password": "12345",
+            },
+            {
+                "username": "Mohammed",
+                "email": "m@gmail.com",
+                "password": "12345",
+            },
+            {
+                "username": "Khalid",
+                "email": "khalid@gmail.com",
+                "password": "12345",
+            },
+        ]
+        
+        for super_user in super_users_data:
+            try:
+                User.objects.create_superuser(
+                    username= super_user["username"],
+                    email= super_user["email"],
+                    password= super_user["password"],
+                )
+                self.stdout.write(
+                    self.style.SUCCESS(f"Successfully Add Super User > {user}")
+                )
+            except Exception as e:
+                self.stdout.write(
+                    self.style.ERROR(f"Error in Super User > {e}")
+                )
+
+        ##########################
 
         for index, profile in enumerate(Profile.objects.all().order_by("created_date")):
             try:
